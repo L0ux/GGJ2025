@@ -1,0 +1,45 @@
+{
+    "name": "Bulle",
+    "maps": [
+        {
+            "name": "default",
+            "id": "c00d4caf-73ec-4f79-8834-e89a6c2953d0",
+            "actions": [
+                {
+                    "name": "jump",
+                    "type": "Button",
+                    "id": "3b029181-e9ca-42e4-99e5-a1aca5757523",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f33304ab-347e-4f73-9ff0-506d72942c6f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86f83de3-591f-4d42-9750-6b74b50935fb",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
