@@ -3,6 +3,8 @@ using UnityEngine;
 using Unity.VisualScripting;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using UnityEngine.Rendering;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 public class MoveInTheAir : MonoBehaviour
 {
@@ -12,106 +14,139 @@ public class MoveInTheAir : MonoBehaviour
     [SerializeField] float maxJumpForce = 30;
 
     [SerializeField] float maxChargeTimeJump;
+    [SerializeField] float maxSpeedInTheAir;
     [SerializeField] float decelarationHorizontal;
-    [SerializeField] Vector2 TMP_JUMP_DIRECTION;
 
-    float TMP_jump_force = 30;
+
+
+    Vector2 jumpDirection;
+    
+    
+    /*A foutre ailleurs*/
+    [SerializeField] private string murTag;
+    [SerializeField] private string savonTag;
+    
 
     Rigidbody2D rb;
-    float horizontalMoveDirection;
     bool accrochedAuSavon;
 
 
     float _timeChargingJump = 0f;
-    
 
+    Vector2 movementDirectionOnGround;
 
+    float inputVerticalDirection;  
+    float inputHorizontalDirection;
 
 
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        stick();
-
     }
    
     // Update is called once per frame
     void Update()
     {
-        /***************MOUVEMENT HORIZONTAL************/
+
+      
 
         /*On lit l'input*/
-        horizontalMoveDirection = Input.GetAxis("Horizontal");
-
-        rb.AddForceX(horizontalMoveDirection * horizontalMovementSpeed);
-
-        /*Freinage*/
-        /* ?? peut être mettre le freinage uniquement si on n'appuie pas sur la touche ?? */
-        rb.linearVelocityX = Mathf.MoveTowards(rb.linearVelocityX, 0, decelarationHorizontal * Time.fixedDeltaTime);
-
-        /*?? Ajouter une vitesse max ??*/
+        inputHorizontalDirection = Input.GetAxis("Horizontal");
+        inputVerticalDirection = Input.GetAxis("Vertical");
 
 
-        /***************GESTION DU SAUT************/
-
-        if(Input.GetKey(KeyCode.Space) && accrochedAuSavon)
+        /*************** SUR LE SOL************/
+        if (accrochedAuSavon)
         {
-            _timeChargingJump += Time.deltaTime;
-            Debug.Log("On charge le saut charge Time : " + _timeChargingJump);
-        }
-        else 
-        {
-            if (_timeChargingJump > 0 && accrochedAuSavon)
+            /*Sur un mur vertical*/
+            if (movementDirectionOnGround == new Vector2(0,1))
             {
-                _timeChargingJump = Mathf.Max(_timeChargingJump, maxChargeTimeJump);
-                
-                /*On récup le pourcentage de temps appuyé,
-                 * 0 si 0secondes 
-                 * 1 si appuyé maxChargeTimeJump*/
-                float jumpPercent = Mathf.Lerp(0, maxChargeTimeJump, _timeChargingJump);
-                doAJump(TMP_JUMP_DIRECTION, jumpPercent * maxJumpForce);
-                
+                Debug.Log("Vertical");
+                rb.linearVelocity = new Vector2(0, inputVerticalDirection * horizontalMovementSpeed) ;
             }
-            _timeChargingJump = 0;
+
+            /*Sur un mur horizontal*/
+            else if (movementDirectionOnGround == new Vector2(1, 0))
+            {
+                Debug.Log("Horizontal");
+                rb.linearVelocity = new Vector2(inputHorizontalDirection * horizontalMovementSpeed, 0);
+
+            }
+            else
+            {
+                throw new System.Exception("Pas de sens de déplacement");
+            }
+
+
+            if (Input.GetKey(KeyCode.Space) && accrochedAuSavon)
+            {
+                _timeChargingJump += Time.deltaTime;
+                Debug.Log("On charge le saut charge Time : " + (_timeChargingJump / maxChargeTimeJump) * 100 + " % ");
+            }
+
+            else
+            {
+                if (_timeChargingJump > 0 && accrochedAuSavon)
+                {
+                    _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
+
+                    /*On récup le pourcentage de temps appuyé*/
+                    float timePressedPercent = _timeChargingJump / maxChargeTimeJump;
+                    doAJump(this.jumpDirection, Mathf.Lerp(0, maxJumpForce, timePressedPercent));
+                }
+                _timeChargingJump = 0;
+            }
         }
+        /***************DANS LES AIRS************/
+        else
+        {
+            rb.AddForceX(inputHorizontalDirection * horizontalMovementSpeed);
 
 
+            /*Freinage*/
+
+            rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelarationHorizontal * Time.fixedDeltaTime);
+
+            rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocityX, -maxSpeedInTheAir, maxSpeedInTheAir), Mathf.Clamp(rb.linearVelocityY, -maxSpeedInTheAir, maxSpeedInTheAir));
+            rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
+
+        }
     }
 
     void FixedUpdate()
     {
-        if(!accrochedAuSavon)
-            rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
+       
+
 
     }
 
 
     void doAJump(Vector2 jumpDirection, float jumpForce)
     {
+        if (jumpDirection == Vector2.zero)
+            throw new System.Exception("Ah ben non on peut pas sauter à 0 "); 
         unstick();
         rb.AddForce(jumpDirection * jumpForce, ForceMode2D.Impulse);
         Debug.Log("On saute avec une force de " + jumpForce);
     }
 
 
-
-
-
-
-    /*Appelé par la barre d'espace*//*
-    public void OnJump()
+    void stickTo(Soap blocSavon)
     {
-        if (!accrochedAuSavon)
-            return;
-        
-        
-        doAJump(TMP_JUMP_DIRECTION);
-    }*/
-
-
-    void stick()
-    {
+        Debug.Log("On s'accroche au bloc : " + blocSavon.gameObject+ "\n \tJump direction : " + blocSavon.getJumpDirection() + "\n\t Horizontal ? " + blocSavon.isWallHorizontal());
         accrochedAuSavon = true;
+       
+        this.jumpDirection = blocSavon.getJumpDirection();
+        
+        if(blocSavon.isWallHorizontal())
+            this.movementDirectionOnGround = new Vector2(1, 0);
+        else
+            this.movementDirectionOnGround = new Vector2(0, 1);
+
+
+
+        /*On s'arrête d'un coup A retirer ? */
+        rb.linearVelocity = Vector2.zero;
     }
 
 
@@ -119,4 +154,32 @@ public class MoveInTheAir : MonoBehaviour
     {
         accrochedAuSavon = false;
     }
+
+
+
+    void pop()
+    {
+        Destroy(this.gameObject);
+        return;
+    }
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.CompareTag(murTag))
+        {
+            pop();
+            return;
+        }
+
+        else if (collision.gameObject.CompareTag(savonTag))
+        {
+            if(! accrochedAuSavon)
+                stickTo(collision.gameObject.GetComponent<Soap>());
+        }
+    }
+
+
 }
