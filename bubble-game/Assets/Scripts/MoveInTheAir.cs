@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using UnityEngine.Rendering;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 public class MoveInTheAir : MonoBehaviour
 {
@@ -13,14 +14,18 @@ public class MoveInTheAir : MonoBehaviour
     [SerializeField] float maxJumpForce = 30;
 
     [SerializeField] float maxChargeTimeJump;
+    [SerializeField] float maxSpeedInTheAir;
     [SerializeField] float decelarationHorizontal;
+
+
+
     Vector2 jumpDirection;
     
     
     /*A foutre ailleurs*/
-    [SerializeField]private string murTag;
-    [SerializeField]private string savonTag;
-
+    [SerializeField] private string murTag;
+    [SerializeField] private string savonTag;
+    
 
     Rigidbody2D rb;
     bool accrochedAuSavon;
@@ -42,14 +47,15 @@ public class MoveInTheAir : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /***************MOUVEMENT HORIZONTAL************/
+
+      
 
         /*On lit l'input*/
         inputHorizontalDirection = Input.GetAxis("Horizontal");
         inputVerticalDirection = Input.GetAxis("Vertical");
 
 
-        /*Mouvement sur le sol*/
+        /*************** SUR LE SOL************/
         if (accrochedAuSavon)
         {
             /*Sur un mur vertical*/
@@ -64,60 +70,54 @@ public class MoveInTheAir : MonoBehaviour
             {
                 Debug.Log("Horizontal");
                 rb.linearVelocity = new Vector2(inputHorizontalDirection * horizontalMovementSpeed, 0);
+
             }
             else
             {
                 throw new System.Exception("Pas de sens de déplacement");
             }
 
+
+            if (Input.GetKey(KeyCode.Space) && accrochedAuSavon)
+            {
+                _timeChargingJump += Time.deltaTime;
+                Debug.Log("On charge le saut charge Time : " + (_timeChargingJump / maxChargeTimeJump) * 100 + " % ");
+            }
+
+            else
+            {
+                if (_timeChargingJump > 0 && accrochedAuSavon)
+                {
+                    _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
+
+                    /*On récup le pourcentage de temps appuyé*/
+                    float timePressedPercent = _timeChargingJump / maxChargeTimeJump;
+                    doAJump(this.jumpDirection, Mathf.Lerp(0, maxJumpForce, timePressedPercent));
+                }
+                _timeChargingJump = 0;
+            }
         }
-        /*Mouvement dans les airs*/
+        /***************DANS LES AIRS************/
         else
         {
             rb.AddForceX(inputHorizontalDirection * horizontalMovementSpeed);
+
+
+            /*Freinage*/
+
+            rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelarationHorizontal * Time.fixedDeltaTime);
+
+            rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocityX, -maxSpeedInTheAir, maxSpeedInTheAir), Mathf.Clamp(rb.linearVelocityY, -maxSpeedInTheAir, maxSpeedInTheAir));
+            rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
+
         }
-
-
-
-
-
-        /*Freinage*/
-        /* ?? peut être mettre le freinage uniquement si on n'appuie pas sur la touche ?? */
-        rb.linearVelocityX = Mathf.MoveTowards(rb.linearVelocityX, 0, decelarationHorizontal * Time.fixedDeltaTime);
-
-        /*?? Ajouter une vitesse max ??*/
-
-
-        /***************GESTION DU SAUT************/
-
-        if(Input.GetKey(KeyCode.Space) && accrochedAuSavon)
-        {
-            _timeChargingJump += Time.deltaTime;
-            Debug.Log("On charge le saut charge Time : " + _timeChargingJump);
-        }
-        else 
-        {
-            if (_timeChargingJump > 0 && accrochedAuSavon)
-            {
-                _timeChargingJump = Mathf.Max(_timeChargingJump, maxChargeTimeJump);
-                
-                /*On récup le pourcentage de temps appuyé,
-                 * 0 si 0secondes 
-                 * 1 si appuyé maxChargeTimeJump*/
-                float timePressedPercent =  _timeChargingJump/maxChargeTimeJump;
-
-                doAJump(this.jumpDirection, Mathf.Lerp(0,maxJumpForce, timePressedPercent));
-            }
-            _timeChargingJump = 0;
-        }
-
-
     }
 
     void FixedUpdate()
     {
-        if(!accrochedAuSavon)
-            rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
+       
+
+
     }
 
 
