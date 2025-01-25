@@ -4,7 +4,18 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public static class Utils 
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public enum CoinRectangle
+    {
+        BAS_GAUCHE =0,
+        BAS_DROITE = 1,
+        HAUT_GAUCHE =2,
+        HAUT_DROIT =3 ,
+        
+        
+    }
+
+    
    public static Vector2[] getAngles(BoxCollider2D boxCollider )
     {
 
