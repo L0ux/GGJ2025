@@ -1,13 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuPause : MonoBehaviour
+public class MenuPerdu : MonoBehaviour
 {
-
     private GameManager gameManager;
-
-    [SerializeField]
-    private Button reprendreButton;
 
     [SerializeField]
     private Button recommencerButton;
@@ -19,16 +15,10 @@ public class MenuPause : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        reprendreButton.onClick.AddListener(Reprendre);
         recommencerButton.onClick.AddListener(Recommencer);
         quitterButton.onClick.AddListener(Quitter);
-        gameManager.SetMenuManager(this.gameObject);
+        gameManager.SetMenuLoose(this.gameObject);
         this.gameObject.SetActive(false);
-    }
-
-    public void Reprendre()
-    {
-        gameManager.ResumeGame();
     }
 
     public void Recommencer()

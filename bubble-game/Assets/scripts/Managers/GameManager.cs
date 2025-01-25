@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     private GameObject menuPause;
+    private GameObject menuWin;
+    private GameObject menuLoose;
     private bool isGamePaused = false;
+    private bool isLevelEnded = false;
     private SceneManager sceneManager;
 
 
@@ -26,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isLevelEnded)
         {
             if (isGamePaused)
             {
@@ -54,8 +57,30 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f; 
     }
 
+    public void NextLevel()
+    {
+        sceneManager.LoadNextScene();
+    }
+
+    public void WinGame()
+    {
+        isLevelEnded = true;
+        menuPause.SetActive(false);
+        menuWin.SetActive(true);
+        menuLoose.SetActive(false);
+    }
+
+    public void LooseGame()
+    {
+        isLevelEnded = true;
+        menuPause.SetActive(false);
+        menuWin.SetActive(false);
+        menuLoose.SetActive(true);
+    }
+
     public void ReloadGame()
     {
+        isLevelEnded = false;
         ResumeGame();
         sceneManager.ReloadCurrentScene();
     }
@@ -65,9 +90,21 @@ public class GameManager : MonoBehaviour
         sceneManager.QuitGame();
     }
 
-    public void SetMenuManager(GameObject menu)
+
+    //Setter
+    public void SetMenuPause(GameObject menu)
     {
         menuPause = menu;
+    }
+
+    public void SetMenuWin(GameObject menu)
+    {
+        menuWin = menu;
+    }
+
+    public void SetMenuLoose(GameObject menu)
+    {
+        menuLoose = menu;
     }
 
 }
