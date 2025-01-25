@@ -40,6 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Soap
+    uniqueID: 3439284111
+    locked: 0
+  - name: Walls
+    uniqueID: 638500647
+    locked: 0
+  - name: BackgroundFront
+    uniqueID: 2767758999
+    locked: 0
+  - name: BackgroundBack
+    uniqueID: 241776885
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
