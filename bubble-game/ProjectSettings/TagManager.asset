@@ -6,6 +6,7 @@ TagManager:
   tags:
   - wall
   - soap
+  - fin
   layers:
   - Default
   - TransparentFX

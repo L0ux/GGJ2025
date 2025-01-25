@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: eb097be9703c945d499f46b187f8476d
+guid: fdb7d2f29821040278fecdd2526f2030
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3237432231029730654
-    second: bubble-idle-Sheet_0
-  - first:
-      213: 221224732699686094
-    second: bubble-idle-Sheet_1
-  - first:
-      213: 2012342762798298593
-    second: bubble-idle-Sheet_2
-  - first:
-      213: 6760622818520016546
-    second: bubble-idle-Sheet_3
+      213: -7242281703089242505
+    second: bubble_base_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -109,89 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bubble-idle-Sheet_0
+      name: bubble_base_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 25
-        width: 32
-        height: 23
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 15
+        y: 15
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2a2921dd9845213d0800000000000000
-      internalID: -3237432231029730654
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bubble-idle-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 25
-        width: 32
-        height: 21
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ec47818e8b2f11300800000000000000
-      internalID: 221224732699686094
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bubble-idle-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 25
-        width: 32
-        height: 19
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1e5bbe6b4174deb10800000000000000
-      internalID: 2012342762798298593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bubble-idle-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 25
-        width: 32
-        height: 21
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2a6294652ae82dd50800000000000000
-      internalID: 6760622818520016546
+      spriteID: 77efd0c892f3e7b90800000000000000
+      internalID: -7242281703089242505
       vertices: []
       indices: 
       edges: []
@@ -200,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cfb3cdf60db454cb2b61d2bf4fa9b400
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bubble-idle-Sheet_0: -3237432231029730654
-      bubble-idle-Sheet_1: 221224732699686094
-      bubble-idle-Sheet_2: 2012342762798298593
-      bubble-idle-Sheet_3: 6760622818520016546
+      bubble_base_0: -7242281703089242505
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
