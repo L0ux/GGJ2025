@@ -226,7 +226,7 @@ public class Bulle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("croisement"))
+        if (collision.gameObject.CompareTag("angle"))
         {
             Debug.Log("On rentre dans un angle");
             currentZoneAngle = collision.gameObject.GetComponent<AngleSavon>();
@@ -235,7 +235,7 @@ public class Bulle : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("croisement"))
+        if (collision.gameObject.CompareTag("angle"))
         {
             Debug.Log("On sort d'un angle");
 
