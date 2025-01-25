@@ -18,16 +18,19 @@ public class Bulle : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void OnJump()
     {
         rb.AddForce(new Vector2(2f, 23f), ForceMode2D.Impulse);
     }
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
