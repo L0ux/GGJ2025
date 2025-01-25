@@ -5,42 +5,54 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class MoveInTheAir : MonoBehaviour
 {
-
-    private InputAction moveAction;
-    [SerializeField] InputActionReference movementAction;
-    [SerializeField] float movementSpeed = 5f;
+    [SerializeField] float customGravity = 2; // Accélération gravité personnalisée
+    [SerializeField] float horizontalMovementSpeed = 50f;
     Vector2 movementDirection;
     Rigidbody2D rb;
     float horizontalMoveDirection;
+    bool accrochedAuSavon;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        stick();
+
+
     }
-
-
-    
-
+   
     // Update is called once per frame
     void Update()
     {
-
-  
         horizontalMoveDirection = Input.GetAxis("Horizontal");
-        rb.linearVelocityX = horizontalMoveDirection * movementSpeed * Time.fixedDeltaTime;
 
-        Debug.Log("Test " + movementDirection.x * movementSpeed);
+        rb.linearVelocityX = horizontalMoveDirection * horizontalMovementSpeed * Time.fixedDeltaTime;
+        
+        Debug.Log("Test " + movementDirection.x * horizontalMovementSpeed);
     }
 
-    public void OnMove(InputValue input)
+    void FixedUpdate()
     {
-        /*  movementDirection = context.ReadValue<Vector2>(); // Cela renverra un Vector2 comme -1, 0, 1 */
-        Debug.Log(movementAction.action.activeValueType);
-        Debug.Log(movementAction.action.activeControl);
+        if(!accrochedAuSavon)
+            rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
+    }
 
-        Debug.Log(input);
+    public void OnJump()
+    {
+        unstick();
+    }
 
+
+    void stick()
+    {
+        accrochedAuSavon = true;
+
+    }
+
+
+    void unstick()
+    {
+        accrochedAuSavon = false;
 
     }
 }
