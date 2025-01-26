@@ -17,7 +17,6 @@ public class MenuPerdu : MonoBehaviour
         gameManager = GameManager.Instance;
         recommencerButton.onClick.AddListener(Recommencer);
         quitterButton.onClick.AddListener(Quitter);
-        gameManager.SetMenuLoose(this.gameObject);
         this.gameObject.SetActive(false);
     }
 

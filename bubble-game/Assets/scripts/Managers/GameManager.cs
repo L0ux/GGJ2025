@@ -6,12 +6,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     private GameObject menuPause;
-    private GameObject menuWin;
-    private GameObject menuLoose;
     private bool isGamePaused = false;
     private bool isLevelEnded = false;
-    private SceneManager sceneManager;
-
 
 
     private void Awake()
@@ -24,7 +20,6 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        sceneManager = SceneManager.Instance;
     }
 
     private void Update()
@@ -59,35 +54,31 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        sceneManager.LoadNextScene();
+        SceneManager.Instance.LoadNextScene();
     }
 
     public void WinGame()
     {
         isLevelEnded = true;
         menuPause.SetActive(false);
-        menuWin.SetActive(true);
-        menuLoose.SetActive(false);
     }
 
     public void LooseGame()
     {
         isLevelEnded = true;
         menuPause.SetActive(false);
-        menuWin.SetActive(false);
-        menuLoose.SetActive(true);
     }
 
     public void ReloadGame()
     {
         isLevelEnded = false;
         ResumeGame();
-        sceneManager.ReloadCurrentScene();
+        SceneManager.Instance.ReloadCurrentScene();
     }
 
     public void QuitGame()
     {
-        sceneManager.QuitGame();
+        SceneManager.Instance.QuitGame();
     }
 
 
@@ -95,16 +86,6 @@ public class GameManager : MonoBehaviour
     public void SetMenuPause(GameObject menu)
     {
         menuPause = menu;
-    }
-
-    public void SetMenuWin(GameObject menu)
-    {
-        menuWin = menu;
-    }
-
-    public void SetMenuLoose(GameObject menu)
-    {
-        menuLoose = menu;
     }
 
 }

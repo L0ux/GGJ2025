@@ -21,7 +21,6 @@ public class MenuGagner : MonoBehaviour
         suivantBouton.onClick.AddListener(Suivant);
         recommencerButton.onClick.AddListener(Recommencer);
         quitterButton.onClick.AddListener(Quitter);
-        gameManager.SetMenuWin(this.gameObject);
         this.gameObject.SetActive(false);
     }
 

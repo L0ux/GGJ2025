@@ -59,19 +59,7 @@ public class Soap : MonoBehaviour
 
     public Vector2 getJumpDirection()
     {
-        switch (this.directionSaut)
-        {
-            case Direction.DROITE:
-                return new Vector2(1, 0);
-            case Direction.GAUCHE:
-                return new Vector2(-1, 0);
-            case Direction.HAUT:
-                return new Vector2(0, 1);
-            case Direction.BAS:
-                return new Vector2(0, -1);
-        }
-
-        throw new System.Exception("HM");
+        return Utils.getVectorDIrection(this.directionSaut);
     }
 
 
