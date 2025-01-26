@@ -268,7 +268,7 @@ MonoBehaviour:
   maxChargeTimeJump: 0.75
   maxSpeedInTheAir: 19.2
   decelaration: 0
-  maxSpeedXInTheAir: 0
+  maxSpeedXInTheAir: 15
 --- !u!95 &-5159430448228933190
 Animator:
   serializedVersion: 7
