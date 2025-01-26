@@ -1,10 +1,4 @@
-using UnityEngine.InputSystem;
 using UnityEngine;
-using Unity.VisualScripting;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
-using UnityEngine.Rendering;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
 using System.Collections;
 
 public class Bulle : MonoBehaviour
@@ -16,8 +10,9 @@ public class Bulle : MonoBehaviour
 
     [SerializeField] float maxChargeTimeJump;
     [SerializeField] float maxSpeedInTheAir;
-    [SerializeField] float decelarationHorizontal;
+    [SerializeField] float decelaration;
 
+    [SerializeField] float maxSpeedXInTheAir; 
 
 
     Vector2 jumpDirection;
@@ -111,7 +106,7 @@ public class Bulle : MonoBehaviour
                 }
             }
 
-            if (Input.GetKey(KeyCode.Space) && accrochedAuSavon)
+            if (Input.GetKey(KeyCode.Space) && accrochedAuSavon )
             {
                 if (_timeChargingJump == 0)
                 {
@@ -139,6 +134,8 @@ public class Bulle : MonoBehaviour
                 _timeChargingJump = 0;
             }
         }
+
+
         /***************DANS LES AIRS************/
         else
         {
@@ -147,12 +144,15 @@ public class Bulle : MonoBehaviour
            
             rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocityX, -maxSpeedInTheAir, maxSpeedInTheAir), Mathf.Clamp(rb.linearVelocityY, -maxSpeedInTheAir, maxSpeedInTheAir));
 
+
+
             /* Custom Gravity*/
             rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
 
         }
+
         /*Freinage pour revenir à 0*/
-        rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelarationHorizontal * Time.fixedDeltaTime);
+        rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelaration * Time.fixedDeltaTime);
 
     }
 
