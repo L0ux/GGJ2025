@@ -51,5 +51,17 @@ public class SceneManager : MonoBehaviour
         Application.Quit();
     }
 
+    public bool IsLastScene()
+    {
+        // Récupère l'index de la scène actuelle
+        int currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+
+        // Récupère le nombre total de scènes dans la build
+        int totalScenesInBuild = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
+
+        // Vérifie si l'index de la scène actuelle est égal à l'index de la dernière scène
+        return currentSceneIndex == totalScenesInBuild - 1;
+    }
+
 
 }
