@@ -2328,21 +2328,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 584665496679523013, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 584665496679523013, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.51
+      value: -8.47
       objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.98
+      value: 6.08
       objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2350,19 +2342,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1
+      value: 0.0000029504295
       objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2374,120 +2366,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 3794455683553561912, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_Name
       value: Bulle
       objectReference: {fileID: 0}
-    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: maxJumpForce
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: maxSpeedInTheAir
-      value: 19.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: maxChargeTimeJump
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744837908718175713, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_Radius
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744837908718175713, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744837908718175713, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7744837908718175713, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 8957579362319999364, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_Size.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8957579362319999364, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8957579362319999364, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: fdb7d2f29821040278fecdd2526f2030, type: 3}
-    - target: {fileID: 8957579362319999364, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8957579362319999364, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7744837908718175713, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3794455683553561912, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 260074631}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
---- !u!1 &260074630 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3794455683553561912, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
-  m_PrefabInstance: {fileID: 260074629}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &260074631
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260074630}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.359375}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.71875}
-  m_EdgeRadius: 0
 --- !u!1001 &281955045
 PrefabInstance:
   m_ObjectHideFlags: 0
