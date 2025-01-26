@@ -581,6 +581,7 @@ GameObject:
   - component: {fileID: 770123581}
   - component: {fileID: 770123580}
   - component: {fileID: 770123582}
+  - component: {fileID: 770123583}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -614,7 +615,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: https://drive.google.com/file/d/1qIg8lAjElf297wywBfXOiphIvY-_qM6E
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -651,6 +652,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770123579}
   m_CullTransparentMesh: 1
+--- !u!114 &770123583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770123579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dd8cbe46316499eb5026c64d949948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 770123580}
+  videoClip: {fileID: 32900000, guid: bee167c218bcd4fb085b91d2f2268e99, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
