@@ -4,7 +4,7 @@ using System.Collections;
 public class Bulle : MonoBehaviour
 {
     [SerializeField] float customGravity = 2; // Accélération gravité personnalisée
-    [SerializeField] float horizontalMovementSpeed = 5f;
+    [SerializeField] float horizontalMovementSpeed = 8f;
 
     [SerializeField] float maxJumpForce = 30;
 
