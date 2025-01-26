@@ -72,42 +72,44 @@ public class Bulle : MonoBehaviour
         /*************** SUR LE SOL************/
         if (accrochedAuSavon)
         {
-            if (currentZoneAngle != null && this.oppositeDirectionPressed() )
+            if( _timeChargingJump == 0)
             {
-                currentZoneAngle.changerDeBord(this, blocSavonSurLequelOnEstAttache);
+                if (currentZoneAngle != null && this.oppositeDirectionPressed())
+                {
+                    currentZoneAngle.changerDeBord(this, blocSavonSurLequelOnEstAttache);
+                }
+                /*Sur un mur vertical*/
+                if (movementDirectionOnGround == new Vector2(0, 1))
+                {
+                    rb.AddForceY(inputVerticalDirection * horizontalMovementSpeed);
+
+
+                    /*On bloque si on est au bord*/
+                    if (transform.position.y > maxDistSavon - 0.001)
+                        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(rb.linearVelocity.y, 0));
+                    if (transform.position.y < minDistSavon + 0.001)
+                        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, 0));
+                }
+
+                /*Sur un mur horizontal*/
+                else if (movementDirectionOnGround == new Vector2(1, 0))
+                {
+
+                    rb.AddForceX(inputHorizontalDirection * horizontalMovementSpeed);
+
+                    /*On bloque si on est au bord*/
+                    if (transform.position.x > maxDistSavon - 0.001)
+                        rb.linearVelocity = new Vector2(Mathf.Min(rb.linearVelocity.x, 0), rb.linearVelocity.y);
+
+                    if (transform.position.x < minDistSavon + 0.001)
+                        rb.linearVelocity = new Vector2(Mathf.Max(rb.linearVelocity.x, 0), rb.linearVelocity.y);
+
+                }
+                else
+                {
+                    throw new System.Exception("Pas de sens de déplacement");
+                }
             }
-            /*Sur un mur vertical*/
-            if (movementDirectionOnGround == new Vector2(0,1))
-            {
-                rb.AddForceY(inputVerticalDirection * horizontalMovementSpeed);
-
-
-                /*On bloque si on est au bord*/
-                if (transform.position.y > maxDistSavon - 0.001)
-                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(rb.linearVelocity.y, 0)) ;
-                if (transform.position.y < minDistSavon + 0.001)
-                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, 0));
-            }
-
-            /*Sur un mur horizontal*/
-            else if (movementDirectionOnGround == new Vector2(1, 0))
-            {
-
-                rb.AddForceX(inputHorizontalDirection * horizontalMovementSpeed);
-
-                /*On bloque si on est au bord*/
-                if (transform.position.x > maxDistSavon - 0.001)
-                    rb.linearVelocity = new Vector2(Mathf.Min(rb.linearVelocity.x, 0), rb.linearVelocity.y);
-
-                if (transform.position.x < minDistSavon + 0.001)
-                    rb.linearVelocity = new Vector2(Mathf.Max(rb.linearVelocity.x, 0), rb.linearVelocity.y);
-
-            }
-            else
-            {
-                throw new System.Exception("Pas de sens de déplacement");
-            }
-
 
             if (Input.GetKey(KeyCode.Space) && accrochedAuSavon)
             {
@@ -115,6 +117,7 @@ public class Bulle : MonoBehaviour
                 {
                     barreChargementAnimator.SetTrigger("startChargement");
                     myAnimator.SetTrigger("ChargeJump");
+                    rb.linearVelocity = Vector2.zero;
                 }
                     
                 _timeChargingJump += Time.deltaTime;
@@ -222,6 +225,7 @@ public class Bulle : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         GameManager.Instance.LooseGame();
+
         Destroy(this.gameObject);
     }
 
@@ -274,6 +278,10 @@ public class Bulle : MonoBehaviour
             Debug.Log("On rentre dans un angle");
             currentZoneAngle = collision.gameObject.GetComponent<AngleSavon>();
 
+        }
+        if (collision.gameObject.CompareTag("fin"))
+        {
+            GameManager.Instance.WinGame();
         }
     }
 
