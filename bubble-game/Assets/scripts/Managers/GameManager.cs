@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance { get; private set; }
 
+    public float waitAfterNextLevel = 2f;
     private GameObject menuPause;
     private bool isGamePaused = false;
     private bool isLevelEnded = false;
@@ -61,12 +63,28 @@ public class GameManager : MonoBehaviour
     {
         isLevelEnded = true;
         menuPause.SetActive(false);
+        StartCoroutine(WaitAndReloadLevel(waitAfterNextLevel));
     }
 
     public void LooseGame()
     {
         isLevelEnded = true;
         menuPause.SetActive(false);
+        StartCoroutine(WaitAndLoadNextLevel(waitAfterNextLevel));
+    }
+
+    private IEnumerator WaitAndLoadNextLevel(float waitTime)
+    {
+       
+        yield return new WaitForSeconds(waitTime);
+        ReloadGame();
+    }
+
+    private IEnumerator WaitAndReloadLevel(float waitTime)
+    {
+
+        yield return new WaitForSeconds(waitTime);
+        NextLevel();
     }
 
     public void ReloadGame()
