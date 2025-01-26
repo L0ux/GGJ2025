@@ -131,9 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1700c8402db398443967c29d47a7e629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customGravity: 1.5
+  customGravity: 5
   horizontalMovementSpeed: 5
-  maxJumpForce: 22
+  maxJumpForce: 9
   maxChargeTimeJump: 0.75
   maxSpeedInTheAir: 19.2
   decelarationHorizontal: 0.2
