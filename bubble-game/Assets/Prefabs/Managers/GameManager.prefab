@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3990d7779b6194008a094501b20232d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitAfterNextLevel: 0.5
