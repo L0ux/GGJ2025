@@ -22,17 +22,13 @@ public class Bulle : MonoBehaviour
 
     Vector2 jumpDirection;
 
-    
-    /*A foutre ailleurs*/
-    [SerializeField] private string murTag;
-    [SerializeField] private string savonTag;
-    
+
 
     Rigidbody2D rb;
 
 
     /*Infos sur le savon*/
-    public GameObject blocSavonSurLequelOnEstAttache;
+    GameObject blocSavonSurLequelOnEstAttache;
     bool accrochedAuSavon;
 
 
@@ -78,7 +74,7 @@ public class Bulle : MonoBehaviour
         {
             if (currentZoneAngle != null && this.oppositeDirectionPressed() )
             {
-                currentZoneAngle.changerDeBord(this);
+                currentZoneAngle.changerDeBord(this, blocSavonSurLequelOnEstAttache);
             }
             /*Sur un mur vertical*/
             if (movementDirectionOnGround == new Vector2(0,1))
@@ -203,6 +199,7 @@ public class Bulle : MonoBehaviour
 
     void unstick()
     {
+        Debug.Log("ON se détache");
         myAnimator.SetBool("Soap", false);
         accrochedAuSavon = false;
     }
@@ -245,17 +242,16 @@ public class Bulle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(murTag) && !accrochedAuSavon)
+
+        if (collision.gameObject.CompareTag("wall") && !accrochedAuSavon)
         {
             pop();
             return;
         }
-        else if (collision.gameObject.CompareTag(savonTag))
-        {
+        else if (collision.gameObject.CompareTag("soap"))
+        {   
             if (!accrochedAuSavon)
-                /* testInfoCollider(collision);*/
                 stickTo(collision.gameObject.GetComponent<Soap>());
-            
         }
     }
 

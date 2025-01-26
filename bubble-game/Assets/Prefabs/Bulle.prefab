@@ -133,13 +133,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customGravity: 1.5
   horizontalMovementSpeed: 5
-  maxJumpForce: 18
+  maxJumpForce: 20
   maxChargeTimeJump: 0.75
   maxSpeedInTheAir: 19.2
   decelarationHorizontal: 0.2
-  murTag: wall
-  savonTag: soap
-  blocSavonSurLequelOnEstAttache: {fileID: 0}
 --- !u!95 &-5159430448228933190
 Animator:
   serializedVersion: 7

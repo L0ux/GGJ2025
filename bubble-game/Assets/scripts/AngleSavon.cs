@@ -54,10 +54,10 @@ public class AngleSavon : MonoBehaviour
     }
 
 
-    public void changerDeBord(Bulle bulle)
+    public void changerDeBord(Bulle bulle, GameObject currentBlocSavon)
     {
         Debug.Log("On utilise un angle");
-        Soap currentBloc = bulle.blocSavonSurLequelOnEstAttache.GetComponent<Soap>();
+        Soap currentBloc = currentBlocSavon.GetComponent<Soap>();
         Soap newBlocToAttach = null;
         Vector2 whereToSpawn = Vector2.negativeInfinity;
 

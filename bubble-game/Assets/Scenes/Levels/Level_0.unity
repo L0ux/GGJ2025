@@ -9058,6 +9058,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bulle
       objectReference: {fileID: 0}
+    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: maxJumpForce
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
