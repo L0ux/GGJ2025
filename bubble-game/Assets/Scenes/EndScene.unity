@@ -321,7 +321,7 @@ PrefabInstance:
     - target: {fileID: 493727464674813325, guid: 632ecf441dd1d4e4b8b93d42eaaf74b7, type: 3}
       propertyPath: sceneManager
       value: 
-      objectReference: {fileID: 1965095832}
+      objectReference: {fileID: 0}
     - target: {fileID: 3387753877354415264, guid: 632ecf441dd1d4e4b8b93d42eaaf74b7, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -581,6 +581,7 @@ GameObject:
   - component: {fileID: 770123581}
   - component: {fileID: 770123580}
   - component: {fileID: 770123582}
+  - component: {fileID: 770123583}
   m_Layer: 0
   m_Name: Video Player
   m_TagString: Untagged
@@ -614,7 +615,7 @@ VideoPlayer:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
-  m_Url: 
+  m_Url: https://drive.google.com/file/d/1qIg8lAjElf297wywBfXOiphIvY-_qM6E
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
@@ -651,74 +652,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770123579}
   m_CullTransparentMesh: 1
---- !u!1001 &1965095831
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 121867795493860810, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_Name
-      value: SceneManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5063092503412750230, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
---- !u!114 &1965095832 stripped
+--- !u!114 &770123583
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8420086223100091002, guid: 87db3b2ade48f4686bfe4c468d2416da, type: 3}
-  m_PrefabInstance: {fileID: 1965095831}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 770123579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e49d6f8a2860c4587962512a6595aa38, type: 3}
+  m_Script: {fileID: 11500000, guid: 94dd8cbe46316499eb5026c64d949948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 770123580}
+  videoClip: {fileID: 32900000, guid: bee167c218bcd4fb085b91d2f2268e99, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -728,4 +675,3 @@ SceneRoots:
   - {fileID: 728606307}
   - {fileID: 15131590}
   - {fileID: 631373729}
-  - {fileID: 1965095831}

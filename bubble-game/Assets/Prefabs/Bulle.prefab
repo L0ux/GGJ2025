@@ -263,11 +263,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customGravity: 5
-  horizontalMovementSpeed: 5
+  horizontalMovementSpeed: 8
   maxJumpForce: 9
   maxChargeTimeJump: 0.75
   maxSpeedInTheAir: 19.2
-  decelarationHorizontal: 0.2
+  decelaration: 0
+  maxSpeedXInTheAir: 0
 --- !u!95 &-5159430448228933190
 Animator:
   serializedVersion: 7

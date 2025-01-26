@@ -21,38 +21,11 @@ public class PlayerSoundManager : MonoBehaviour
     private string soapTag = "soap";
     private string wallTag = "wall";
 
-    private static PlayerSoundManager instance;
-
-    void Awake()
-    {
-        // Singleton pattern to avoid duplicate instances
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
-    void Start()
-    {
-        // Ensure an AudioSource is attached
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-    }
-
     void Update()
     {
         // Play or stop sounds based on conditions
         if (isCollidingSoap)
         {
-            // Handle sliding sounds
             HandleSound(slide, keyUp, true);
             HandleSound(slide, keyDown, true);
             HandleSound(slide, keyLeft, true);
@@ -65,14 +38,16 @@ public class PlayerSoundManager : MonoBehaviour
             if (Input.GetKeyUp(keyCharge))
             {
                 PlaySound(jump);
+                Debug.Log("JUMP");
             }
         }
-        else if (isCollidingWall)
+        if (isCollidingWall && !isCollidingSoap)
         {
             // Play pop sound only if not already playing
             if (!audioSource.isPlaying || audioSource.clip != pop)
             {
                 PlaySound(pop);
+                Debug.Log("PAF");
             }
         }
         else
@@ -94,7 +69,6 @@ public class PlayerSoundManager : MonoBehaviour
         else if (collision.gameObject.CompareTag(wallTag))
         {
             isCollidingWall = true;
-            isCollidingSoap = false;
         }
     }
 
@@ -123,14 +97,6 @@ public class PlayerSoundManager : MonoBehaviour
                 audioSource.Play();
             }
         }
-        else
-        {
-            // Stop sound if key is released
-            if (audioSource.isPlaying && audioSource.clip == clip)
-            {
-                audioSource.Stop();
-            }
-        }
     }
 
     void PlaySound(AudioClip clip)
@@ -140,14 +106,14 @@ public class PlayerSoundManager : MonoBehaviour
         {
             audioSource.Stop();
         }
-        audioSource.loop = false;
-        audioSource.clip = clip;
-        audioSource.Play();
+        if(!audioSource.isPlaying && audioSource.clip == clip){
+            audioSource.loop = false;
+            audioSource.Play();
+        }
     }
 
     void StopSound()
     {
-        // Stop any sound
         if (audioSource.isPlaying)
         {
             audioSource.Stop();
