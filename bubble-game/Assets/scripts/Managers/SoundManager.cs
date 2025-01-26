@@ -7,6 +7,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip musicClip;        // Clip de musique à jouer en boucle
     private static SoundManager instance; // Instance statique pour gérer le singleton
 
+
+    public SceneManager sceneManager;
+
     void Awake()
     {
         // Vérifie si une instance existe déjà
@@ -17,15 +20,19 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            // Sinon, affecter l'instance actuelle à l'objet et ne pas le détruire lors du chargement de scènes
+            if (sceneManager.IsLastScene())
+            {
+                PlayMusicForLastScene();
+            }
             instance = this;
             DontDestroyOnLoad(gameObject);  // Cela permet de garder l'objet lors du changement de scène
         }
+
     }
 
     void Start()
     {
-        // Assure-toi que la musique est lancée en boucle
+          
         if (musicSource != null && !musicSource.isPlaying)
         {
             musicSource.clip = musicClip;
@@ -49,5 +56,13 @@ public class SoundManager : MonoBehaviour
         {
             musicSource.Stop();
         }
+    }
+
+    private void PlayMusicForLastScene()
+    {
+        StopMusic();
+        musicSource.clip = musicClip;
+        musicSource.loop = false; 
+        musicSource.Play();
     }
 }
