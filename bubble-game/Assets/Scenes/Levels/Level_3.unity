@@ -3052,7 +3052,7 @@ PrefabInstance:
     - target: {fileID: 7051478116096041532, guid: d7ec5e6ab31124ff0967439dac13a1f4, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1189217293}
     - target: {fileID: 7051478116096041532, guid: d7ec5e6ab31124ff0967439dac13a1f4, type: 3}
       propertyPath: m_PlaneDistance
       value: 100
@@ -9250,8 +9250,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 84459205}
   - {fileID: 1189217294}
+  - {fileID: 84459205}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &751463308
