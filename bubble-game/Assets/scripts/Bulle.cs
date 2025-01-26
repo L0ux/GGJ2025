@@ -172,8 +172,6 @@ public class Bulle : MonoBehaviour
             minDistSavon = blocSavon.getCoin(Utils.CoinRectangle.BAS_GAUCHE).y;
             maxDistSavon = blocSavon.getCoin(Utils.CoinRectangle.HAUT_GAUCHE).y;
         }
-
-
         /*On s'arrête d'un coup A retirer ? */
         rb.linearVelocity = Vector2.zero;
     }

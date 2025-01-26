@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionSaut: 0
+  directionSaut: 2
 --- !u!61 &178816660
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6232,7 +6232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionSaut: 0
+  directionSaut: 2
 --- !u!61 &1119519197
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9015,6 +9015,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 584665496679523013, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 584665496679523013, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
@@ -9061,6 +9065,18 @@ PrefabInstance:
     - target: {fileID: 3794455683553561912, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_Name
       value: Bulle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: maxJumpForce
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: maxSpeedInTheAir
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: maxChargeTimeJump
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7744837908718175713, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_Radius
@@ -9256,7 +9272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionSaut: 0
+  directionSaut: 2
 --- !u!61 &1607818495
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10978,21 +10994,29 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1735567436432509238, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
+      propertyPath: directionSaut
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1773538314573197028, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_Name
       value: Savon
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalScale.x
-      value: 9.884988
+      value: 9.2756815
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.47615927
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.0345
+      value: -3.2546
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2115486
+      value: 2.15
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalPosition.z
