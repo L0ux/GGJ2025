@@ -20,7 +20,7 @@ public class Bulle : MonoBehaviour
 
 
     Vector2 jumpDirection;
-    
+
     
     /*A foutre ailleurs*/
     [SerializeField] private string murTag;
@@ -47,12 +47,16 @@ public class Bulle : MonoBehaviour
     float inputVerticalDirection;  
     float inputHorizontalDirection;
 
-
     AngleSavon currentZoneAngle;
+    Animator myAnimator;
+    Animator barreChargementAnimator;
 
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
+
+        myAnimator = this.GetComponent<Animator>();
+        barreChargementAnimator = transform.Find("BarreChargement").GetComponent<Animator>();
     }
    
     // Update is called once per frame
@@ -68,7 +72,6 @@ public class Bulle : MonoBehaviour
         {
             if (currentZoneAngle != null && this.oppositeDirectionPressed() )
             {
-                Debug.Log("AZEAZE1");
                 currentZoneAngle.changerDeBord(this);
             }
             /*Sur un mur vertical*/
@@ -82,7 +85,7 @@ public class Bulle : MonoBehaviour
                     inputVerticalDirection = Mathf.Max(inputVerticalDirection, 0);
                   
 
-                rb.linearVelocity = new Vector2(0, inputVerticalDirection * horizontalMovementSpeed);
+                rb.linearVelocity = new Vector2(-jumpDirection.x * 8 , inputVerticalDirection * horizontalMovementSpeed);
             }
 
             /*Sur un mur horizontal*/
@@ -95,7 +98,7 @@ public class Bulle : MonoBehaviour
                 if (transform.position.x < minDistSavon)
                     inputHorizontalDirection = Mathf.Max(inputHorizontalDirection, 0);
 
-                rb.linearVelocity = new Vector2(inputHorizontalDirection * horizontalMovementSpeed, 0);
+                rb.linearVelocity = new Vector2(inputHorizontalDirection * horizontalMovementSpeed, -jumpDirection.y * 8);
             }
             else
             {
@@ -105,6 +108,12 @@ public class Bulle : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space) && accrochedAuSavon)
             {
+                if (_timeChargingJump == 0)
+                {
+                    barreChargementAnimator.SetTrigger("startChargement");
+                    myAnimator.SetTrigger("ChargeJump");
+                }
+                    
                 _timeChargingJump += Time.deltaTime;
                 Debug.Log("On charge le saut charge Time : " + (_timeChargingJump / maxChargeTimeJump) * 100 + " % ");
             }
@@ -113,7 +122,14 @@ public class Bulle : MonoBehaviour
             {
                 if (_timeChargingJump > 0 && accrochedAuSavon)
                 {
+
+                    Debug.Log(" RELEASE ");
+                    
+                    barreChargementAnimator.SetTrigger("releaseButton");
+                    myAnimator.SetTrigger("Jump");
+
                     _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
+
 
                     /*On récup le pourcentage de temps appuyé*/
                     float timePressedPercent = _timeChargingJump / maxChargeTimeJump;
@@ -131,12 +147,12 @@ public class Bulle : MonoBehaviour
             rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelarationHorizontal * Time.fixedDeltaTime);
             
             rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocityX, -maxSpeedInTheAir, maxSpeedInTheAir), Mathf.Clamp(rb.linearVelocityY, -maxSpeedInTheAir, maxSpeedInTheAir));
-            
+
+            /* Custom Gravity*/
             rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
 
         }
     }
-
 
 
     void doAJump(Vector2 jumpDirection, float jumpForce)
@@ -144,6 +160,7 @@ public class Bulle : MonoBehaviour
         if (jumpDirection == Vector2.zero)
             throw new System.Exception("Ah ben non on peut pas sauter à 0 "); 
         unstick();
+        myAnimator.SetTrigger("Jump");
         rb.AddForce(jumpDirection * jumpForce, ForceMode2D.Impulse);
         Debug.Log("On saute avec une force de " + jumpForce);
     }
@@ -151,15 +168,19 @@ public class Bulle : MonoBehaviour
 
     public void stickTo(Soap blocSavon)
     {
-
+        
         Debug.Log("On s'accroche au bloc : " + blocSavon.gameObject+ "\n \tJump direction : " + blocSavon.getJumpDirection() + "\n\t Horizontal ? " + blocSavon.isWallHorizontal());
-        blocSavonSurLequelOnEstAttache = blocSavon.gameObject;
 
+        blocSavonSurLequelOnEstAttache = blocSavon.gameObject;
         accrochedAuSavon = true;
         this.jumpDirection = blocSavon.getJumpDirection();
+        this.rotate(this.jumpDirection);
+        myAnimator.SetBool("Soap", true);
+            
 
 
         /*On récupère la taille max*/
+        
         if (blocSavon.isWallHorizontal())
         {
             this.movementDirectionOnGround = new Vector2(1, 0);
@@ -172,13 +193,17 @@ public class Bulle : MonoBehaviour
             minDistSavon = blocSavon.getCoin(Utils.CoinRectangle.BAS_GAUCHE).y;
             maxDistSavon = blocSavon.getCoin(Utils.CoinRectangle.HAUT_GAUCHE).y;
         }
-        /*On s'arrête d'un coup A retirer ? */
-        rb.linearVelocity = Vector2.zero;
+
+        rb.AddForce(-jumpDirection * 8 );
+
+        /*On s'arrête d'un coup A retirer ? *//*
+        rb.linearVelocity = Vector2.zero;*/
     }
 
 
     void unstick()
     {
+        myAnimator.SetBool("Soap", false);
         accrochedAuSavon = false;
     }
 
@@ -195,7 +220,6 @@ public class Bulle : MonoBehaviour
     /*Retourne vrai si on est sur un mur et qu'on appuie sur une autre*/
     bool oppositeDirectionPressed()
     {
-        Debug.Log("AZEAZE");
         if (movementDirectionOnGround == Vector2.up)
         {
             return Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow);
@@ -221,6 +245,7 @@ public class Bulle : MonoBehaviour
             if (!accrochedAuSavon)
                 /* testInfoCollider(collision);*/
                 stickTo(collision.gameObject.GetComponent<Soap>());
+            
         }
     }
 
@@ -241,11 +266,18 @@ public class Bulle : MonoBehaviour
         if (collision.gameObject.CompareTag("angle"))
         {
             Debug.Log("On sort d'un angle");
-            
             currentZoneAngle = null;
         }
     }
 
+
+    
+
+    void rotate(Vector2 normalVector)
+    {
+        float newAngle =  Utils.calculateRealAngle(Vector2.up, normalVector);
+        transform.rotation = Quaternion.Euler(0, 0, newAngle); 
+    }
 
     void testInfoCollider(Collision2D collision)
     {
