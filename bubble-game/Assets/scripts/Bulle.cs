@@ -5,6 +5,7 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using UnityEngine.Rendering;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
+using System.Collections;
 
 public class Bulle : MonoBehaviour
 {
@@ -51,6 +52,8 @@ public class Bulle : MonoBehaviour
     Animator myAnimator;
     Animator barreChargementAnimator;
 
+
+    bool isDead =false;
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
@@ -62,6 +65,9 @@ public class Bulle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (isDead)
+            return;
         /*On lit l'input*/
         inputHorizontalDirection = Input.GetAxis("Horizontal");
         inputVerticalDirection = Input.GetAxis("Vertical");
@@ -91,7 +97,7 @@ public class Bulle : MonoBehaviour
             /*Sur un mur horizontal*/
             else if (movementDirectionOnGround == new Vector2(1, 0))
             {
-              
+
                 /*On bloque si on est au bord*/
                 if (transform.position.x > maxDistSavon) 
                     inputHorizontalDirection = Mathf.Min(inputHorizontalDirection,0);
@@ -122,14 +128,10 @@ public class Bulle : MonoBehaviour
             {
                 if (_timeChargingJump > 0 && accrochedAuSavon)
                 {
-
-                    Debug.Log(" RELEASE ");
-                    
                     barreChargementAnimator.SetTrigger("releaseButton");
                     myAnimator.SetTrigger("Jump");
 
                     _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
-
 
                     /*On récup le pourcentage de temps appuyé*/
                     float timePressedPercent = _timeChargingJump / maxChargeTimeJump;
@@ -193,11 +195,9 @@ public class Bulle : MonoBehaviour
             minDistSavon = blocSavon.getCoin(Utils.CoinRectangle.BAS_GAUCHE).y;
             maxDistSavon = blocSavon.getCoin(Utils.CoinRectangle.HAUT_GAUCHE).y;
         }
-
-        rb.AddForce(-jumpDirection * 8 );
-
-        /*On s'arrête d'un coup A retirer ? *//*
-        rb.linearVelocity = Vector2.zero;*/
+        
+        /*On s'arrête d'un coup A retirer ? */
+        rb.linearVelocity = Vector2.zero;
     }
 
 
@@ -211,9 +211,19 @@ public class Bulle : MonoBehaviour
 
     void pop()
     {
+        isDead = true;
+        rb.linearVelocity = Vector2.zero;
+        myAnimator.SetTrigger("Explosion");
+        StartCoroutine(waittheGameOver());
+        return;
+    }
+
+    IEnumerator waittheGameOver()
+    {
+        yield return new WaitForSeconds(0.2f);
+
         GameManager.Instance.LooseGame();
         Destroy(this.gameObject);
-        return;
     }
 
     
@@ -269,29 +279,12 @@ public class Bulle : MonoBehaviour
             currentZoneAngle = null;
         }
     }
-
-
     
 
     void rotate(Vector2 normalVector)
     {
         float newAngle =  Utils.calculateRealAngle(Vector2.up, normalVector);
         transform.rotation = Quaternion.Euler(0, 0, newAngle); 
-    }
-
-    void testInfoCollider(Collision2D collision)
-    {
-        Collider2D hitCollider = collision.collider;
-
-        if (hitCollider is PolygonCollider2D polygonCollider)
-        {
-            Debug.Log("Nombre de points dans le collider: " + polygonCollider.points.Length);
-            // Affiche les points du collider
-            foreach (Vector2 point in polygonCollider.points)
-            {
-                Debug.Log("Point: " + point);
-            }
-        }
     }
 
 }
