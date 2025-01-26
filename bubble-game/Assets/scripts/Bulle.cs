@@ -66,10 +66,9 @@ public class Bulle : MonoBehaviour
         /*************** SUR LE SOL************/
         if (accrochedAuSavon)
         {
-
-
             if (currentZoneAngle != null && this.oppositeDirectionPressed() )
             {
+                Debug.Log("AZEAZE1");
                 currentZoneAngle.changerDeBord(this);
             }
             /*Sur un mur vertical*/
@@ -89,6 +88,7 @@ public class Bulle : MonoBehaviour
             /*Sur un mur horizontal*/
             else if (movementDirectionOnGround == new Vector2(1, 0))
             {
+              
                 /*On bloque si on est au bord*/
                 if (transform.position.x > maxDistSavon) 
                     inputHorizontalDirection = Mathf.Min(inputHorizontalDirection,0);
@@ -189,6 +189,7 @@ public class Bulle : MonoBehaviour
     void pop()
     {
         GameManager.Instance.LooseGame();
+        Destroy(this.gameObject);
         return;
     }
 
@@ -196,6 +197,7 @@ public class Bulle : MonoBehaviour
     /*Retourne vrai si on est sur un mur et qu'on appuie sur une autre*/
     bool oppositeDirectionPressed()
     {
+        Debug.Log("AZEAZE");
         if (movementDirectionOnGround == Vector2.up)
         {
             return Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow);
@@ -211,14 +213,15 @@ public class Bulle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(murTag))
+        if (collision.gameObject.CompareTag(murTag) && !accrochedAuSavon)
         {
             pop();
             return;
         }
         else if (collision.gameObject.CompareTag(savonTag))
         {
-            if(!accrochedAuSavon)
+            if (!accrochedAuSavon)
+                /* testInfoCollider(collision);*/
                 stickTo(collision.gameObject.GetComponent<Soap>());
         }
     }
@@ -226,10 +229,12 @@ public class Bulle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.gameObject.CompareTag("angle"))
         {
             Debug.Log("On rentre dans un angle");
             currentZoneAngle = collision.gameObject.GetComponent<AngleSavon>();
+
         }
     }
 
@@ -238,8 +243,24 @@ public class Bulle : MonoBehaviour
         if (collision.gameObject.CompareTag("angle"))
         {
             Debug.Log("On sort d'un angle");
-
+            
             currentZoneAngle = null;
+        }
+    }
+
+
+    void testInfoCollider(Collision2D collision)
+    {
+        Collider2D hitCollider = collision.collider;
+
+        if (hitCollider is PolygonCollider2D polygonCollider)
+        {
+            Debug.Log("Nombre de points dans le collider: " + polygonCollider.points.Length);
+            // Affiche les points du collider
+            foreach (Vector2 point in polygonCollider.points)
+            {
+                Debug.Log("Point: " + point);
+            }
         }
     }
 

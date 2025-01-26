@@ -11,12 +11,18 @@ public static class Utils
         BAS_DROITE = 1,
         HAUT_GAUCHE =2,
         HAUT_DROIT =3 ,
-        
-        
     }
 
-    
-   public static Vector2[] getAngles(BoxCollider2D boxCollider )
+    public enum Direction
+    {
+       HAUT,
+       GAUCHE,
+       BAS, 
+       DROITE
+    }
+
+
+    public static Vector2[] getAngles(BoxCollider2D boxCollider )
     {
 
         Vector2 size = boxCollider.size * boxCollider.transform.localScale; // Taille de la boîte

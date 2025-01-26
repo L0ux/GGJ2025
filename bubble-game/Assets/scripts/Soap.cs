@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Utils;
@@ -5,23 +6,29 @@ using static Utils;
 public class Soap : MonoBehaviour
 {
 
-    [SerializeField] public Vector2 jumpDirection;
+   /* [SerializeField] public Vector2 jumpDirection;*/
+    [SerializeField] public Direction directionSaut;
+
 
     bool murHorizontal;
     Vector2 bottomLeft;
     Vector2 bottomRight;
     Vector2 topLeft;
     Vector2 topRight;
+
+
     private void Start()
     {
-        if (jumpDirection == Vector2.zero)
+        if (getJumpDirection() == Vector2.zero)
             throw new System.Exception("Bah non mon reuf faut mettre une direction de saut");
+        gameObject.gameObject.tag = "soap";
+       
+
         
-        
-        if (jumpDirection.y == 0)
-            murHorizontal = false;
-        else
+        if (getJumpDirection().x == 0)
             murHorizontal = true;
+        else
+            murHorizontal = false;
 
 
         BoxCollider2D boxCollider =  this.GetComponent<BoxCollider2D>();
@@ -52,7 +59,19 @@ public class Soap : MonoBehaviour
 
     public Vector2 getJumpDirection()
     {
-        return this.jumpDirection;
+        switch (this.directionSaut)
+        {
+            case Direction.DROITE:
+                return new Vector2(1, 0);
+            case Direction.GAUCHE:
+                return new Vector2(-1, 0);
+            case Direction.HAUT:
+                return new Vector2(0, 1);
+            case Direction.BAS:
+                return new Vector2(0, -1);
+        }
+
+        throw new System.Exception("HM");
     }
 
 

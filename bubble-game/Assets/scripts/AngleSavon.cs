@@ -78,7 +78,7 @@ public class AngleSavon : MonoBehaviour
         bulle.stickTo(newBlocToAttach);
 
         /*Besoin de mettre un offset ?? */
-        bulle.transform.position = whereToSpawn + ( newBlocToAttach.jumpDirection *0.3f) +(currentBloc.jumpDirection * 0.005f);
+        bulle.transform.position = whereToSpawn + ( newBlocToAttach.getJumpDirection() *0.3f) +(currentBloc.getJumpDirection() * 0.005f);
 
     }
 

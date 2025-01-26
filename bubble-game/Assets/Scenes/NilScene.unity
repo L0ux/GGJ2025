@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!61 &22291944
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!61 &141414349
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 188011668}
   m_Layer: 0
   m_Name: Angle
-  m_TagString: croisement
+  m_TagString: angle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: -1, y: 0}
+  orientation: 0
 --- !u!61 &448899958
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2250,7 +2250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 1, y: 0}
+  orientation: 0
 --- !u!61 &701239496
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2962,7 +2962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: 1}
+  orientation: 0
 --- !u!61 &937280000
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3337,7 +3337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 2
 --- !u!61 &1114776795
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3753,7 +3753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!61 &1130636935
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3943,7 +3943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!61 &1149159534
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4119,7 +4119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!61 &1176308490
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4470,7 +4470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 1, y: 0}
+  orientation: 3
 --- !u!61 &1335675019
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4774,7 +4774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!1 &1434225310
 GameObject:
   m_ObjectHideFlags: 0
@@ -4822,7 +4822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!61 &1434225313
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4998,7 +4998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!61 &1657057132
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5174,7 +5174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: 1}
+  orientation: 0
 --- !u!61 &1711390110
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5363,7 +5363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 0, y: -1}
+  orientation: 0
 --- !u!61 &1743523735
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6406,7 +6406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a4d73dc68aa841b6a63a25fa43fb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpDirection: {x: 1, y: 0}
+  orientation: 0
 --- !u!61 &2014974271
 BoxCollider2D:
   m_ObjectHideFlags: 0
