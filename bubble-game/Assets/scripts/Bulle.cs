@@ -79,28 +79,29 @@ public class Bulle : MonoBehaviour
             /*Sur un mur vertical*/
             if (movementDirectionOnGround == new Vector2(0,1))
             {
+                rb.AddForceY(inputVerticalDirection * horizontalMovementSpeed);
+
 
                 /*On bloque si on est au bord*/
-                if (transform.position.y > maxDistSavon)
-                    inputVerticalDirection = Mathf.Min(inputVerticalDirection, 0);
-                if (transform.position.y < minDistSavon)
-                    inputVerticalDirection = Mathf.Max(inputVerticalDirection, 0);
-                  
-
-                rb.linearVelocity = new Vector2(-jumpDirection.x * 8 , inputVerticalDirection * horizontalMovementSpeed);
+                if (transform.position.y > maxDistSavon - 0.001)
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(rb.linearVelocity.y, 0)) ;
+                if (transform.position.y < minDistSavon + 0.001)
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, 0));
             }
 
             /*Sur un mur horizontal*/
             else if (movementDirectionOnGround == new Vector2(1, 0))
             {
 
-                /*On bloque si on est au bord*/
-                if (transform.position.x > maxDistSavon) 
-                    inputHorizontalDirection = Mathf.Min(inputHorizontalDirection,0);
-                if (transform.position.x < minDistSavon)
-                    inputHorizontalDirection = Mathf.Max(inputHorizontalDirection, 0);
+                rb.AddForceX(inputHorizontalDirection * horizontalMovementSpeed);
 
-                rb.linearVelocity = new Vector2(inputHorizontalDirection * horizontalMovementSpeed, -jumpDirection.y * 8);
+                /*On bloque si on est au bord*/
+                if (transform.position.x > maxDistSavon - 0.001)
+                    rb.linearVelocity = new Vector2(Mathf.Min(rb.linearVelocity.x, 0), rb.linearVelocity.y);
+
+                if (transform.position.x < minDistSavon + 0.001)
+                    rb.linearVelocity = new Vector2(Mathf.Max(rb.linearVelocity.x, 0), rb.linearVelocity.y);
+
             }
             else
             {
@@ -125,7 +126,6 @@ public class Bulle : MonoBehaviour
                 if (_timeChargingJump > 0 && accrochedAuSavon)
                 {
                     barreChargementAnimator.SetTrigger("releaseButton");
-                    myAnimator.SetTrigger("Jump");
 
                     _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
 
@@ -141,15 +141,16 @@ public class Bulle : MonoBehaviour
         {
             rb.AddForceX(inputHorizontalDirection * horizontalMovementSpeed);
 
-            /*Freinage pour revenir à 0*/
-            rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelarationHorizontal * Time.fixedDeltaTime);
-            
+           
             rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocityX, -maxSpeedInTheAir, maxSpeedInTheAir), Mathf.Clamp(rb.linearVelocityY, -maxSpeedInTheAir, maxSpeedInTheAir));
 
             /* Custom Gravity*/
             rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
 
         }
+        /*Freinage pour revenir à 0*/
+        rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelarationHorizontal * Time.fixedDeltaTime);
+
     }
 
 
@@ -157,8 +158,9 @@ public class Bulle : MonoBehaviour
     {
         if (jumpDirection == Vector2.zero)
             throw new System.Exception("Ah ben non on peut pas sauter à 0 "); 
-        unstick();
+
         myAnimator.SetTrigger("Jump");
+        myAnimator.SetBool("Soap", false);
         rb.AddForce(jumpDirection * jumpForce, ForceMode2D.Impulse);
         Debug.Log("On saute avec une force de " + jumpForce);
     }
@@ -256,6 +258,14 @@ public class Bulle : MonoBehaviour
     }
 
 
+    private void OnCollisionExit2D(UnityEngine.Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("soap") && collision.gameObject == blocSavonSurLequelOnEstAttache)
+        {
+            unstick();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -274,6 +284,9 @@ public class Bulle : MonoBehaviour
             Debug.Log("On sort d'un angle");
             currentZoneAngle = null;
         }
+
+
+
     }
     
 

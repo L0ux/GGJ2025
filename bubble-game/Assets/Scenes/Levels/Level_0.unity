@@ -180,8 +180,8 @@ Transform:
   m_GameObject: {fileID: 178816657}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5185, y: -2.9072, z: 0}
-  m_LocalScale: {x: 2.8923194, y: 0.30353403, z: 1}
+  m_LocalPosition: {x: 4.522, y: -2.989, z: 0}
+  m_LocalScale: {x: 2.8923194, y: 0.12499531, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 437548869}
@@ -9060,7 +9060,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: maxJumpForce
-      value: 20
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: customGravity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261778834813504340, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: horizontalMovementSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10901,19 +10909,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalScale.x
-      value: 9.2756815
+      value: 9.438934
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.47615927
+      value: -0.0088200895
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.2546
+      value: -3.173
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.15
+      value: 1.9413
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalPosition.z
