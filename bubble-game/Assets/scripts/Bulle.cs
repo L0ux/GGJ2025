@@ -98,7 +98,7 @@ public class Bulle : MonoBehaviour
 
                     if (transform.position.x < minDistSavon + 0.001)
                         rb.linearVelocity = new Vector2(Mathf.Max(rb.linearVelocity.x, 0), rb.linearVelocity.y);
-
+                
                 }
                 else
                 {
@@ -133,6 +133,10 @@ public class Bulle : MonoBehaviour
                 }
                 _timeChargingJump = 0;
             }
+
+            /* On freine sur le sol */
+            rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelaration * Time.fixedDeltaTime);
+
         }
 
 
@@ -151,7 +155,8 @@ public class Bulle : MonoBehaviour
 
         }
 
-        /*Freinage pour revenir à 0*/
+        
+
         rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelaration * Time.fixedDeltaTime);
 
     }
