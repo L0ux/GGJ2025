@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customGravity: 1.5
   horizontalMovementSpeed: 5
-  maxJumpForce: 20
+  maxJumpForce: 22
   maxChargeTimeJump: 0.75
   maxSpeedInTheAir: 19.2
   decelarationHorizontal: 0.2
