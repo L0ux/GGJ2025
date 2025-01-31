@@ -20,7 +20,7 @@ public class PlayerSoundManager : MonoBehaviour
     private bool isCollidingSoap = false;
     private bool isCollidingWall = false;
 
-    private string soapTag = "soap";
+    private string soapTag = "bordCollant";
     private string wallTag = "wall";
 
     void Update()
