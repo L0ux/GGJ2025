@@ -199,6 +199,7 @@ public class Bulle2 : MonoBehaviour
     {
         if (collision.gameObject.tag == "bordCollant")
         {
+            Debug.Log("On est tjrs sur un bloc");
 
             Soap2 hehe = collision.gameObject.GetComponent<Soap2>();
             blocSavonSurLequelOnEstAttache = hehe;
