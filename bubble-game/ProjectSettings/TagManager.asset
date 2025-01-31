@@ -8,6 +8,8 @@ TagManager:
   - soap
   - fin
   - angle
+  - croisement
+  - bordCollant
   layers:
   - Default
   - TransparentFX
