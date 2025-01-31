@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerSoundManager : MonoBehaviour
 {
     public AudioSource audioSourceEffects;
+    public AudioSource audioSourceMovement;
     public AudioClip pop;
     public AudioClip slide;
     public AudioClip charge;
@@ -18,6 +19,7 @@ public class PlayerSoundManager : MonoBehaviour
 
     private bool isCollidingSoap = false;
     private bool isCollidingWall = false;
+
     private string soapTag = "soap";
     private string wallTag = "wall";
 
@@ -26,28 +28,21 @@ public class PlayerSoundManager : MonoBehaviour
         // Play or stop sounds based on conditions
         if (isCollidingSoap)
         {
-            if(Input.GetKeyUp(keyLeft) || Input.GetKeyUp(keyRight) || Input.GetKeyUp(keyUp) || Input.GetKeyUp(keyDown)){
-                audioSourceEffects.loop = true;
-                PlaySound(slide);
+            if(Input.GetKey(keyLeft) || Input.GetKey(keyRight) || Input.GetKey(keyUp) || Input.GetKey(keyDown)){
+                audioSourceMovement.loop = true;
+                PlaySound(slide, audioSourceMovement);
             } else {
-                StopSound();
+                StopSound(audioSourceMovement);
             }
 
-            if(Input.GetKeyUp(keyCharge)){
-                PlaySound(charge);
+            if(Input.GetKey(keyCharge)){
+                PlaySound(charge, audioSourceEffects);
             }
-            // HandleSound(slide, keyUp, true);
-            // HandleSound(slide, keyDown, true);
-            // HandleSound(slide, keyLeft, true);
-            // HandleSound(slide, keyRight, true);
-
-            // Handle charging sound
-            //HandleSound(charge, keyCharge, false);
 
             // Play jump sound when the charge key is released
             if (Input.GetKeyUp(keyCharge))
             {
-                PlaySound(jump);
+                PlaySound(jump, audioSourceEffects);
             }
         }
         if (isCollidingWall && !isCollidingSoap)
@@ -55,7 +50,7 @@ public class PlayerSoundManager : MonoBehaviour
             // Play pop sound only if not already playing
             if (audioSourceEffects.clip != pop)
             {
-                PlaySound(pop);
+                PlaySound(pop, audioSourceEffects);
                 Debug.Log("PAF");
                 isCollidingWall = false;
             }
@@ -90,43 +85,25 @@ public class PlayerSoundManager : MonoBehaviour
         }
     }
 
-    void HandleSound(AudioClip clip, KeyCode key, bool loop)
-    {
-        // Play sound if key is pressed
-        if (Input.GetKeyUp(key))
-        {
-            if (!audioSourceEffects.isPlaying || audioSourceEffects.clip != clip)
-            {
-                audioSourceEffects.clip = clip;
-                audioSourceEffects.loop = loop;
-                audioSourceEffects.Play();
-            }
-        } else {
-            if(audioSourceEffects.isPlaying && audioSourceEffects.clip == clip){
-                audioSourceEffects.Stop();
-            }
-        }
-    }
-
-    void PlaySound(AudioClip clip)
+    void PlaySound(AudioClip clip, AudioSource src)
     {
         // Stop current sound and play the new clip
-        if (audioSource.isPlaying && audioSource.clip != clip)
+        if (src.isPlaying && src.clip != clip)
         {
-            audioSource.Stop();
+            src.Stop();
         }
-        if(!audioSource.isPlaying){
-            audioSource.clip = clip;
-            audioSource.loop = false;
-            audioSource.Play();
+        if(!src.isPlaying){
+            src.clip = clip;
+            src.loop = false;
+            src.Play();
         }
     }
 
-    void StopSound()
+    void StopSound(AudioSource src)
     {
-        if (audioSource.isPlaying)
+        if (src.isPlaying)
         {
-            audioSource.Stop();
+            src.Stop();
         }
     }
 }
