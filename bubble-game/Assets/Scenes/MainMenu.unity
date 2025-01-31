@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 1987144872}
   - component: {fileID: 1987144871}
   - component: {fileID: 1987144870}
+  - component: {fileID: 1987144873}
   m_Layer: 5
   m_Name: BouttonJouer
   m_TagString: Untagged
@@ -695,6 +696,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1987144868}
   m_CullTransparentMesh: 1
+--- !u!95 &1987144873
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987144868}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a58e38ed9e624d942949752b34f6daf1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &700590589350636793
 PrefabInstance:
   m_ObjectHideFlags: 0

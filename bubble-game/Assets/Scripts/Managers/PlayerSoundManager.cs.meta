@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 8b5d72cbc80fb004bab6f44d75d944ac
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - pop: {fileID: 8300000, guid: 84ebd135047385841a0d618cd00a9bf8, type: 3}
+  - slide: {fileID: 8300000, guid: fee9bb6ca05e6d246a9be55928d952b0, type: 3}
+  - charge: {fileID: 8300000, guid: 101501b4e4375d841b6d04b87d8055f2, type: 3}
+  - jump: {fileID: 8300000, guid: 4c32c786c3e358a47acc3b03e5c3860d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
