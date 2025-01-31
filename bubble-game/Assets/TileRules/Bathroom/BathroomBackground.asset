@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: BathroomBackground
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 2224313704685299184, guid: e961ad72a7a376e4fad5070c0f6a3d54, type: 3}
+  m_DefaultSprite: {fileID: 3632151238060605509, guid: e961ad72a7a376e4fad5070c0f6a3d54, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
