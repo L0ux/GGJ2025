@@ -161,7 +161,6 @@ public class Bulle2 : MonoBehaviour
         this.directionSaut =blocSavon.getJumpDirection();
         blocSavonSurLequelOnEstAttache = blocSavon;
 
-
     }
     private void unStick()
     {

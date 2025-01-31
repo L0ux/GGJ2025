@@ -47,7 +47,7 @@ public class PlayerSoundManager : MonoBehaviour
             if (!audioSource.isPlaying || audioSource.clip != pop)
             {
                 PlaySound(pop);
-                Debug.Log("PAF");
+ /*               Debug.Log("PAF");*/
             }
         }
         else
