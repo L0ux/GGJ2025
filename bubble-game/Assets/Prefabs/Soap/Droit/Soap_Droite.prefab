@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1773538314573197028, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_Name
-      value: Soap_Gauche
+      value: Soap_Droite
       objectReference: {fileID: 0}
     - target: {fileID: 2257669958775553579, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_Size.x
-      value: 0.08
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 2257669958775553579, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_Size.y
@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2257669958775553579, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_Offset.x
-      value: -0.47
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 2257669958775553579, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_Offset.y

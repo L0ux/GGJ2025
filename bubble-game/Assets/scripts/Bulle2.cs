@@ -29,13 +29,14 @@ public class Bulle2 : MonoBehaviour
     Rigidbody2D rb;
     Animator myAnimator;
     Animator barreChargementAnimator;
-
+    SpriteRenderer mySpriteRenderer;
 
     Soap2 blocSavonSurLequelOnEstAttache;
 
     Vector2 directionSaut;
 
     bool inputAccepted = true;
+    bool isDead = false;
 
     float _timeChargingJump = 0;
 
@@ -45,10 +46,13 @@ public class Bulle2 : MonoBehaviour
 
         myAnimator = this.GetComponent<Animator>();
         barreChargementAnimator = transform.Find("BarreChargement").GetComponent<Animator>();
+        mySpriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
     {
+        if (isDead)
+            return;
         float moveInputHorizontal = 0;
         float moveInputVerical = 0;
 
@@ -61,6 +65,11 @@ public class Bulle2 : MonoBehaviour
         /*************DANS LES AIRS************************/
         if (!isAccrocheAuSavon())
         {
+
+            /*A voir pour enlever*/
+            myAnimator.SetBool("Soap", false);
+
+
             /* On pousse vers le haut*/
             rb.linearVelocityY += flottementVersLeHaut * Time.fixedDeltaTime;
 
@@ -140,7 +149,7 @@ public class Bulle2 : MonoBehaviour
 
         myAnimator.SetTrigger("Jump");
         myAnimator.SetBool("Soap", false);
-
+          myAnimator.SetTrigger("Jump");
         rb.AddForce(directionSaut * (pourcentagePuissanceSaut * maxJumpForce), ForceMode2D.Impulse);
         StartCoroutine(blocInput());
         Debug.Log("On saute avec une force de " + (pourcentagePuissanceSaut * maxJumpForce));
@@ -167,36 +176,61 @@ public class Bulle2 : MonoBehaviour
         Debug.Log("On se détache du bloc " + blocSavonSurLequelOnEstAttache);
         this.directionSaut = Vector2.zero;
         blocSavonSurLequelOnEstAttache = null;
+        myAnimator.SetBool("Soap", false);
+    }
+    void pop()
+    {
+        isDead = true;
+        rb.linearVelocity = Vector2.zero;
+        myAnimator.SetTrigger("Explosion");
+        StartCoroutine(waittheGameOver());
+        return;
     }
 
+    IEnumerator waittheGameOver()
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        GameManager.Instance.LooseGame();
+        Destroy(this.gameObject);
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "bordCollant")
         {
+
             Soap2 hehe = collision.gameObject.GetComponent<Soap2>();
             blocSavonSurLequelOnEstAttache = hehe;
             this.directionSaut = hehe.getJumpDirection();
-            this.directionSaut = hehe.getJumpDirection();
+            this.rotate(this.directionSaut);
+            myAnimator.SetBool("Soap", true);
         }
     }
 
-
-
-    /*  private void OnTriggerEnter2D(Collider2D collision)
-      {
-          if(collision.gameObject.tag == "bordCollant")
-          {
-              stickTo(collision.gameObject.GetComponent<Soap2>());
-          }
-      }
-  */
-
-
-
-    /*Vérif si il n'y a pas d'autres collisions*/
-    private void OnTriggerExit2D(Collider2D collision)
+    void rotate(Vector2 normalVector)
     {
+
+        float newAngle = Utils.calculateRealAngle(Vector2.up, normalVector);
+        transform.rotation = Quaternion.Euler(0, 0, newAngle);
+
+
+    }
+
+        /*  private void OnTriggerEnter2D(Collider2D collision)
+          {
+              if(collision.gameObject.tag == "bordCollant")
+              {
+                  stickTo(collision.gameObject.GetComponent<Soap2>());
+              }
+          }
+      */
+
+
+
+        /*Vérif si il n'y a pas d'autres collisions*/
+        private void OnTriggerExit2D(Collider2D collision)
+       {
         if (collision.gameObject.tag == "bordCollant")
         {
             if (collision.gameObject.GetComponent<Soap2>() == blocSavonSurLequelOnEstAttache)
@@ -205,6 +239,15 @@ public class Bulle2 : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("wall") && !isAccrocheAuSavon())
+        {
+            pop();
+            return;
+        }
     }
 
 

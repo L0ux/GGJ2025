@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.WSA;
 
 public class SoapTileManager : MonoBehaviour
 {
@@ -40,7 +41,8 @@ public class SoapTileManager : MonoBehaviour
                 if(currentTile == couple.tile)
                 {
                     Vector3 worldPos = tilemap.GetCellCenterWorld(position);
-                    Instantiate(couple.prefab, worldPos, Quaternion.identity);
+                    GameObject newSoap = Instantiate(couple.prefab, worldPos, Quaternion.identity);
+                    newSoap.transform.SetParent(tilemap.gameObject.transform);
                 }
             }
         }
