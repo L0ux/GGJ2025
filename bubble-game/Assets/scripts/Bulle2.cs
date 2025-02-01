@@ -1,7 +1,6 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEngine.LightAnchor;
+
 
 public class Bulle2 : MonoBehaviour
 {
