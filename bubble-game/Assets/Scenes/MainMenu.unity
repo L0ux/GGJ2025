@@ -658,6 +658,54 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 700590589350636794}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: ChangeMusic
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: f4ba6bcbfb28a4a4691c79f6bb5cbaab, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 700590589350636794}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetChangeSpeed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 700590589350636794}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.4
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 700590589350636794}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetBaseVolume
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1987144871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,9 +815,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 493727464674813325, guid: 632ecf441dd1d4e4b8b93d42eaaf74b7, type: 3}
+      propertyPath: musicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 61b47ff040cb82f488fc233e515f70e6, type: 3}
+    - target: {fileID: 493727464674813325, guid: 632ecf441dd1d4e4b8b93d42eaaf74b7, type: 3}
       propertyPath: sceneManager
       value: 
       objectReference: {fileID: 500809020}
+    - target: {fileID: 2782894545032990511, guid: 632ecf441dd1d4e4b8b93d42eaaf74b7, type: 3}
+      propertyPath: m_Volume
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 3387753877354415264, guid: 632ecf441dd1d4e4b8b93d42eaaf74b7, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -779,6 +835,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 632ecf441dd1d4e4b8b93d42eaaf74b7, type: 3}
+--- !u!114 &700590589350636794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 493727464674813325, guid: 632ecf441dd1d4e4b8b93d42eaaf74b7, type: 3}
+  m_PrefabInstance: {fileID: 700590589350636793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ca57aa58fe34519b2ecc020d02eb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4888882587113012147
 PrefabInstance:
   m_ObjectHideFlags: 0
