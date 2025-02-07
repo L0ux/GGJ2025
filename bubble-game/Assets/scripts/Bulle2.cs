@@ -21,6 +21,8 @@ public class Bulle2 : MonoBehaviour
     [SerializeField] float maxChargeTimeJump;
 
 
+    [SerializeField] Collider2D zoneBarriere;
+
     /*[SerializeField] float maxSpeedInTheAir;*/
     
 
@@ -46,6 +48,12 @@ public class Bulle2 : MonoBehaviour
         myAnimator = this.GetComponent<Animator>();
         barreChargementAnimator = transform.Find("BarreChargement").GetComponent<Animator>();
         mySpriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+
+
+        if (zoneBarriere == null)
+            throw new System.Exception("Faut mettre la barriere");
+
+        zoneBarriere.enabled = false;
     }
 
     private void FixedUpdate()
@@ -158,7 +166,7 @@ public class Bulle2 : MonoBehaviour
     IEnumerator blocInput()
     {
         inputAccepted = false;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.15f);
         inputAccepted = true;
 
     }
@@ -176,6 +184,7 @@ public class Bulle2 : MonoBehaviour
         this.directionSaut = Vector2.zero;
         blocSavonSurLequelOnEstAttache = null;
         myAnimator.SetBool("Soap", false);
+        zoneBarriere.enabled = false;
     }
     void pop()
     {
@@ -205,6 +214,7 @@ public class Bulle2 : MonoBehaviour
             this.directionSaut = hehe.getJumpDirection();
             this.rotate(this.directionSaut);
             myAnimator.SetBool("Soap", true);
+            zoneBarriere.enabled = true;
         }
     }
 
