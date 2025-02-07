@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1453719570746100778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3933148047707770080}
+  m_Layer: 0
+  m_Name: Sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3933148047707770080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453719570746100778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1892185248795982009}
+  - {fileID: 3615576156641695575}
+  m_Father: {fileID: 3785236546693480453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1887513667001172195
 GameObject:
   m_ObjectHideFlags: 0
@@ -25,12 +58,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887513667001172195}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3785236546693480453}
+  m_Father: {fileID: 3933148047707770080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8603124000628618296
 AudioSource:
@@ -142,8 +175,8 @@ GameObject:
   - component: {fileID: 584665496679523013}
   - component: {fileID: 3173539815340506874}
   - component: {fileID: -5159430448228933190}
-  - component: {fileID: 311140964502382519}
   - component: {fileID: 549787860643021664}
+  - component: {fileID: 8162097937792144250}
   m_Layer: 0
   m_Name: Bulle
   m_TagString: Untagged
@@ -165,8 +198,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9210086906033921879}
-  - {fileID: 1892185248795982009}
-  - {fileID: 3615576156641695575}
+  - {fileID: 3933148047707770080}
+  - {fileID: 3550991982950633099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.778}
 --- !u!212 &8957579362319999364
@@ -267,8 +300,9 @@ MonoBehaviour:
   moveSpeedOnTheGRound: 8
   moveSpeedOnTheAir: 20
   decelarationInTheAir: 5
-  maxJumpForce: 14
+  maxJumpForce: 16
   maxChargeTimeJump: 1
+  zoneBarriere: {fileID: 317223065784086873}
 --- !u!95 &-5159430448228933190
 Animator:
   serializedVersion: 7
@@ -291,8 +325,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &311140964502382519
-BoxCollider2D:
+--- !u!114 &549787860643021664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3794455683553561912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5d72cbc80fb004bab6f44d75d944ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceEffects: {fileID: 8603124000628618296}
+  audioSourceMovement: {fileID: 8661822839529304198}
+  pop: {fileID: 8300000, guid: 84ebd135047385841a0d618cd00a9bf8, type: 3}
+  slide: {fileID: 8300000, guid: fee9bb6ca05e6d246a9be55928d952b0, type: 3}
+  charge: {fileID: 8300000, guid: 101501b4e4375d841b6d04b87d8055f2, type: 3}
+  jump: {fileID: 8300000, guid: 4c32c786c3e358a47acc3b03e5c3860d, type: 3}
+  keyUp: 273
+  keyDown: 274
+  keyLeft: 276
+  keyRight: 275
+  keyCharge: 32
+--- !u!58 &8162097937792144250
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -325,41 +382,86 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.05102831}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.022479}
-  m_EdgeRadius: 0
---- !u!114 &549787860643021664
-MonoBehaviour:
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.51
+--- !u!1 &5473615026384456848
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3794455683553561912}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3550991982950633099}
+  - component: {fileID: 317223065784086873}
+  m_Layer: 6
+  m_Name: BarrierePourPasTomber
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3550991982950633099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473615026384456848}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3785236546693480453}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &317223065784086873
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473615026384456848}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b5d72cbc80fb004bab6f44d75d944ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSourceEffects: {fileID: 8603124000628618296}
-  audioSourceMovement: {fileID: 8661822839529304198}
-  pop: {fileID: 8300000, guid: 84ebd135047385841a0d618cd00a9bf8, type: 3}
-  slide: {fileID: 8300000, guid: fee9bb6ca05e6d246a9be55928d952b0, type: 3}
-  charge: {fileID: 8300000, guid: 101501b4e4375d841b6d04b87d8055f2, type: 3}
-  jump: {fileID: 8300000, guid: 4c32c786c3e358a47acc3b03e5c3860d, type: 3}
-  keyUp: 273
-  keyDown: 274
-  keyLeft: 276
-  keyRight: 275
-  keyCharge: 32
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.026138067, y: 0.00000011920929}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.79089594, y: 0.85064006}
+  m_EdgeRadius: 0
 --- !u!1 &7097254865136938266
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,12 +597,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8054008725883957587}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3785236546693480453}
+  m_Father: {fileID: 3933148047707770080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8661822839529304198
 AudioSource:
