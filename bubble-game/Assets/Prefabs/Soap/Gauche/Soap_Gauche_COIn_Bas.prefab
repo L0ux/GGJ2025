@@ -83,12 +83,16 @@ PrefabInstance:
       value: Soap_Gauche_COIn_Bas
       objectReference: {fileID: 0}
     - target: {fileID: 4364928485146590790, guid: 00dfb246eb76aca42ab85efec1e2f7bf, type: 3}
+      propertyPath: m_Size.x
+      value: 0.14999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364928485146590790, guid: 00dfb246eb76aca42ab85efec1e2f7bf, type: 3}
       propertyPath: m_Size.y
-      value: 0.5
+      value: 0.7577121
       objectReference: {fileID: 0}
     - target: {fileID: 4364928485146590790, guid: 00dfb246eb76aca42ab85efec1e2f7bf, type: 3}
       propertyPath: m_Offset.y
-      value: 0.25
+      value: 0.12114394
       objectReference: {fileID: 0}
     - target: {fileID: 7618805081323695878, guid: 00dfb246eb76aca42ab85efec1e2f7bf, type: 3}
       propertyPath: m_LocalPosition.x
