@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6658687782191923658, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.75
+      value: -0.746
       objectReference: {fileID: 0}
     - target: {fileID: 6658687782191923658, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.184
       objectReference: {fileID: 0}
     - target: {fileID: 6658687782191923658, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -48,6 +48,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8686402800903235776, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5850111
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686402800903235776, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.020377815
+      objectReference: {fileID: 0}
     - target: {fileID: 8738893822096252540, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_Name
       value: Barriere Protection Verticale (1)
@@ -80,11 +88,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2257669958775553579, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_Size.y
-      value: 0.5
+      value: 0.16666871
       objectReference: {fileID: 0}
     - target: {fileID: 2257669958775553579, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_Offset.y
-      value: 0.25
+      value: 0.41666564
       objectReference: {fileID: 0}
     - target: {fileID: 5367414805550018411, guid: 4822abe525af0c444adb8fafe310d968, type: 3}
       propertyPath: m_LocalScale.x
@@ -160,11 +168,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6658687782191923658, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.75
+      value: 0.738
       objectReference: {fileID: 0}
     - target: {fileID: 6658687782191923658, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 6658687782191923658, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -197,6 +205,14 @@ PrefabInstance:
     - target: {fileID: 6658687782191923658, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686402800903235776, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
+      propertyPath: m_Size.y
+      value: 0.55800414
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686402800903235776, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.03388132
       objectReference: {fileID: 0}
     - target: {fileID: 8738893822096252540, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_Name

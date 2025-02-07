@@ -48,6 +48,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8686402800903235776, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
+      propertyPath: m_Size.y
+      value: 0.49374783
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686402800903235776, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.25312608
+      objectReference: {fileID: 0}
     - target: {fileID: 8738893822096252540, guid: db155def03f2c8c4481fa96cecaba96a, type: 3}
       propertyPath: m_Name
       value: Barriere Protection Verticale
