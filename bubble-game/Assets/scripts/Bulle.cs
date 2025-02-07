@@ -294,7 +294,7 @@ public class Bulle : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("fin"))
         {
-            GameManager.Instance.WinGame();
+            GameManager.Instance.WinRoom();
         }
     }
 

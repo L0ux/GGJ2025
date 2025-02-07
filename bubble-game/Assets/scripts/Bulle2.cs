@@ -227,14 +227,13 @@ public class Bulle2 : MonoBehaviour
 
     }
 
-        /*  private void OnTriggerEnter2D(Collider2D collision)
-          {
-              if(collision.gameObject.tag == "bordCollant")
-              {
-                  stickTo(collision.gameObject.GetComponent<Soap2>());
-              }
-          }
-      */
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("fin"))
+        {
+            GameManager.Instance.WinRoom();
+        }
+    }
 
 
 

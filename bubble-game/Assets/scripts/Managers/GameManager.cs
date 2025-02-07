@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         SceneManager.Instance.LoadNextScene();
     }
 
-    public void WinGame()
+    public void WinRoom()
     {
         isLevelEnded = true;
         menuPause.SetActive(false);
