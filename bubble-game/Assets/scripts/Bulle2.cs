@@ -14,8 +14,11 @@ public class Bulle2 : MonoBehaviour
 
 
     [SerializeField] float moveSpeedOnTheGRound = 8f;
+
     [SerializeField] float moveSpeedOnTheAir;
     [SerializeField] float decelarationInTheAir;
+
+    [SerializeField] float maxMooveSpeed = 6f;
 
 
     [SerializeField] float maxJumpForce = 30;
@@ -79,7 +82,8 @@ public class Bulle2 : MonoBehaviour
 
 
             /* On pousse vers le haut*/
-            rb.linearVelocityY += flottementVersLeHaut * Time.fixedDeltaTime;
+            float newVelocityY = rb.linearVelocityY + (flottementVersLeHaut * Time.fixedDeltaTime);
+            rb.linearVelocityY = Mathf.Min(maxMooveSpeed, newVelocityY);
 
 
             // Déplacement horizontal, conserve la vitesse verticale
