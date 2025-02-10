@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using GameUtils;
 
 
 public class Bulle2 : MonoBehaviour
@@ -257,6 +258,16 @@ public class Bulle2 : MonoBehaviour
             pop();
             return;
         }
+    }
+
+    public Direction GetDirection(){
+        if(rb.linearVelocityY > 1){
+            return Direction.MOVING_UP;
+        }
+        if(rb.linearVelocityY < -1){
+            return Direction.MOVING_DOWN;
+        }
+        return Direction.NEUTRAL;
     }
 
 
