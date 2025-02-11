@@ -26,9 +26,12 @@ public class Bulle2 : MonoBehaviour
 
 
     [SerializeField] Collider2D zoneBarriere;
+    [SerializeField] ParticleSystem particleOnJump;
+    [SerializeField] ParticleSystem particleOnJump2;
 
+    [SerializeField] ParticleSystem particleOnSlide;
     /*[SerializeField] float maxSpeedInTheAir;*/
-    
+
 
     /*Affecté dans le start*/
     Rigidbody2D rb;
@@ -153,15 +156,17 @@ public class Bulle2 : MonoBehaviour
 
         _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
 
+        particleOnJump.Play();
+        particleOnJump2.Play();
 
         /*On récup le pourcentage de temps appuyé*/
         float pourcentagePuissanceSaut = _timeChargingJump / maxChargeTimeJump;
+
         if (directionSaut == Vector2.zero)
             throw new System.Exception("Ah ben non on peut pas sauter à 0 ");
 
         myAnimator.SetTrigger("Jump");
         myAnimator.SetBool("Soap", false);
-          myAnimator.SetTrigger("Jump");
         rb.AddForce(directionSaut * (pourcentagePuissanceSaut * maxJumpForce), ForceMode2D.Impulse);
         StartCoroutine(blocInput());
         Debug.Log("On saute avec une force de " + (pourcentagePuissanceSaut * maxJumpForce));
@@ -190,6 +195,8 @@ public class Bulle2 : MonoBehaviour
         blocSavonSurLequelOnEstAttache = null;
         myAnimator.SetBool("Soap", false);
         zoneBarriere.enabled = false;
+        particleOnSlide.Stop();
+
     }
     void pop()
     {
@@ -220,6 +227,8 @@ public class Bulle2 : MonoBehaviour
             this.rotate(this.directionSaut);
             myAnimator.SetBool("Soap", true);
             zoneBarriere.enabled = true;
+            if (!particleOnSlide.isPlaying)
+                particleOnSlide.Play();
         }
     }
 
