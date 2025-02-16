@@ -142,18 +142,19 @@ public class Bulle2 : MonoBehaviour
     {
         if (_timeChargingJump == 0)
         {
-            barreChargementAnimator.SetTrigger("startChargement");
+           
             myAnimator.SetTrigger("ChargeJump");
             rb.linearVelocity = Vector2.zero;
         }
 
         _timeChargingJump += Time.deltaTime;
+        barreChargementAnimator.SetFloat("chargement", _timeChargingJump / maxChargeTimeJump);
     }
 
     void sauter()
     {
         barreChargementAnimator.SetTrigger("releaseButton");
-
+        barreChargementAnimator.SetFloat("chargement", 0);
         _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
 
         particleOnJump.Play();
