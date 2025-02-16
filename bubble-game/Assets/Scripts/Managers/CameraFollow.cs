@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
     
     private float limitPos;
 
-    private Bulle2 playerController;
+    private Bulle playerController;
     public float fixedX; // Position X fixe
     public float fixedZ; // Position Z fixe (classique pour une caméra 2D)
 
@@ -28,7 +28,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         limitPos = INIT_POS_Y - getDeltaHeightForMiddle();
-        playerController = player.GetComponent<Bulle2>();
+        playerController = player.GetComponent<Bulle>();
         smoothSpeed = INIT_SMOOTH_SPEED;
         Vector3 targetPosition = new Vector3(fixedX, INIT_POS_Y, fixedZ);
         transform.position = targetPosition;
