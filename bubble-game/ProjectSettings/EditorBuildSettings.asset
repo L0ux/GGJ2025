@@ -12,20 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Interface/MainMenu.unity
     guid: 1580edbaa75544b52a4f268f7a31f9c0
   - enabled: 1
-    path: Assets/Scenes/Levels/Pipe_intro.unity
-    guid: f263beeac9e660e448bb834e953a0078
-  - enabled: 1
-    path: Assets/Scenes/Levels/Pipe_1_1.unity
-    guid: 5c0dfdc5b7086ed40a98ea0f61ad787c
-  - enabled: 1
-    path: Assets/Scenes/Levels/Pipe_1_2.unity
-    guid: b899d459a437fc844b7e05684eb40a81
-  - enabled: 1
-    path: Assets/Scenes/Levels/Pipe_1_3.unity
-    guid: 595363ed00789794ba7dab8d9804ad57
-  - enabled: 1
     path: Assets/Scenes/Levels/Bathroom_intro.unity
     guid: cf3f6a89523a925478de49e68ea7bb69
+  - enabled: 1
+    path: Assets/Scenes/Levels/Pipe_intro.unity
+    guid: f263beeac9e660e448bb834e953a0078
   - enabled: 1
     path: Assets/Scenes/Levels/Bathroom_1_1.unity
     guid: d9c869785eaf22644a91cba7ddc59aad
@@ -36,11 +27,20 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Bathroom_1_3.unity
     guid: 7c52f948e60276946a71b953fdac535c
   - enabled: 1
-    path: Assets/Scenes/Interface/EndScene.unity
-    guid: 25f01715c32d74c059abfbbd6b9a7dc9
+    path: Assets/Scenes/Levels/Pipe_1_1.unity
+    guid: 5c0dfdc5b7086ed40a98ea0f61ad787c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Pipe_1_2.unity
+    guid: b899d459a437fc844b7e05684eb40a81
+  - enabled: 1
+    path: Assets/Scenes/Levels/Pipe_1_3.unity
+    guid: 595363ed00789794ba7dab8d9804ad57
   - enabled: 1
     path: Assets/Scenes/Levels/Bathroom_2_1.unity
     guid: f60a1b633208b8747a5a40af29ddb49e
+  - enabled: 1
+    path: Assets/Scenes/Interface/EndScene.unity
+    guid: 25f01715c32d74c059abfbbd6b9a7dc9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 55c6ba8b4df674033998b02553f3606d, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3b470b04e80464e4dba999c24140b502, type: 3}
