@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test/NilsScene2.unity
     guid: 8eba3152dfed8ed41b999c30159326aa
   - enabled: 1

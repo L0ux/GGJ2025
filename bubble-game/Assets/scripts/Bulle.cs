@@ -13,12 +13,17 @@ public class Bulle : MonoBehaviour
     [SerializeField] float flottementVersLeHaut = 2; // Accélération gravité Vers le haut
 
 
-    [SerializeField] float moveSpeedOnTheGRound = 8f;
+    [SerializeField] float moveSpeedOnTheGround = 8f;
+    [SerializeField] float maxMoveSpeedOnTheGround = 6f;
+    [SerializeField] float decelerationOnTheGround;
+
 
     [SerializeField] float moveSpeedOnTheAir;
     [SerializeField] float decelarationInTheAir;
 
-    [SerializeField] float maxMooveSpeed = 6f;
+    [SerializeField] float maxMooveSpeedInTheAir = 6f;
+
+    
 
 
     [SerializeField] float maxJumpForce = 30;
@@ -86,11 +91,12 @@ public class Bulle : MonoBehaviour
 
             /* On pousse vers le haut*/
             float newVelocityY = rb.linearVelocityY + (flottementVersLeHaut * Time.fixedDeltaTime);
-            rb.linearVelocityY = Mathf.Min(maxMooveSpeed, newVelocityY);
+            rb.linearVelocityY = Mathf.Min(maxMooveSpeedInTheAir, newVelocityY);
 
 
             // Déplacement horizontal, conserve la vitesse verticale
-            rb.linearVelocityX += moveInputHorizontal * moveSpeedOnTheAir *Time.fixedDeltaTime; 
+            rb.linearVelocityX = rb.linearVelocityX +  moveInputHorizontal * moveSpeedOnTheAir *Time.fixedDeltaTime;
+          
 
 
             /*ON ralentit la vitesse*/
@@ -115,12 +121,16 @@ public class Bulle : MonoBehaviour
                     /*Sinon on gère le déplacement*/
                     /*Sur un mur horizontal*/
                     if (this.directionSaut.x == 0)
-                        rb.linearVelocityX = moveInputHorizontal * moveSpeedOnTheGRound; // Déplacement horizontal, conserve la vitesse verticale
+                        rb.linearVelocityX += moveInputHorizontal * moveSpeedOnTheGround; // Déplacement horizontal, conserve la vitesse verticale
 
                     /*Sur un mur vertical*/
                     if (this.directionSaut.y == 0)
-                        rb.linearVelocityY = moveInputVerical * moveSpeedOnTheGRound; // Déplacement horizontal, conserve la vitesse verticale
+                        rb.linearVelocityY += moveInputVerical * moveSpeedOnTheGround; // Déplacement horizontal, conserve la vitesse verticale
 
+
+                    rb.linearVelocity = Utils.vectorClamp(rb.linearVelocity, maxMoveSpeedOnTheGround);
+                    rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero,decelerationOnTheGround); 
+                       
                     /*On se colle contre le bord de savon*/
                     rb.linearVelocity += -this.directionSaut *1;
                 }
@@ -247,6 +257,11 @@ public class Bulle : MonoBehaviour
         if (collision.gameObject.CompareTag("fin"))
         {
             GameManager.Instance.WinRoom();
+        }
+
+        if (collision.gameObject.tag == "bordCollant" && !isAccrocheAuSavon() )
+        {
+            rb.linearVelocity = Vector2.zero;
         }
     }
 

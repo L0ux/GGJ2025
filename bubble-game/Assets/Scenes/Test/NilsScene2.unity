@@ -15476,6 +15476,18 @@ PrefabInstance:
       propertyPath: maxChargeTimeJump
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3173539815340506874, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: moveSpeedOnTheGround
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173539815340506874, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: decelerationOnTheGround
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173539815340506874, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
+      propertyPath: maxMoveSpeedOnTheGround
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3785236546693480453, guid: 15d1e14c2cf754f6fb830a367e0ae996, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.47

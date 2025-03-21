@@ -5234,10 +5234,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flottementVersLeHaut: 5
-  moveSpeedOnTheGRound: 8
+  moveSpeedOnTheGround: 8
+  maxMoveSpeedOnTheGround: 6
+  decelerationOnTheGround: 0.4
   moveSpeedOnTheAir: 20
   decelarationInTheAir: 5
-  maxMooveSpeed: 6
+  maxMooveSpeedInTheAir: 6
   maxJumpForce: 18
   maxChargeTimeJump: 1.5
   zoneBarriere: {fileID: 317223065784086873}
