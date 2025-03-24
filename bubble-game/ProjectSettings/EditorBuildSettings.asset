@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Test/NilsScene2.unity
     guid: 8eba3152dfed8ed41b999c30159326aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Interface/MainMenu.unity
     guid: 1580edbaa75544b52a4f268f7a31f9c0
+  - enabled: 1
+    path: Assets/Scenes/Test/TEst Scene.unity
+    guid: 328b6b06d03baa04cbc0be45e4f9938a
   - enabled: 1
     path: Assets/Scenes/Levels/Bathroom_intro.unity
     guid: cf3f6a89523a925478de49e68ea7bb69
