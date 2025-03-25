@@ -23,40 +23,6 @@ public class PlayerSoundManager : MonoBehaviour
     private string soapTag = "bordCollant";
     private string wallTag = "wall";
 
-    void Update()
-    {
-        // Play or stop sounds based on conditions
-        if (isCollidingSoap)
-        {
-            if(Input.GetKey(keyLeft) || Input.GetKey(keyRight) || Input.GetKey(keyUp) || Input.GetKey(keyDown)){
-                audioSourceMovement.loop = true;
-                PlaySound(slide, audioSourceMovement);
-            } else {
-                StopSound(audioSourceMovement);
-            }
-
-            if(Input.GetKey(keyCharge)){
-                PlaySound(charge, audioSourceEffects);
-            }
-
-            // Play jump sound when the charge key is released
-            if (Input.GetKeyUp(keyCharge))
-            {
-                PlaySound(jump, audioSourceEffects);
-            }
-        }
-        if (isCollidingWall && !isCollidingSoap)
-        {
-            // Play pop sound only if not already playing
-            if (audioSourceEffects.clip != pop)
-            {
-                PlaySound(pop, audioSourceEffects);
-                Debug.Log("PAF");
-                isCollidingWall = false;
-            }
-        }
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Check collision with soap
@@ -106,4 +72,36 @@ public class PlayerSoundManager : MonoBehaviour
             src.Stop();
         }
     }
+
+    public void deathSound()
+    {
+        // Play pop sound only if not already playing
+        if (audioSourceEffects.clip != pop)
+        {
+            PlaySound(pop, audioSourceEffects);
+            Debug.Log("PAF");
+            isCollidingWall = false;
+        }
+    }
+
+
+    public void chargeJumpSound()
+    {
+        PlaySound(charge, audioSourceEffects);
+    }
+    public void releaseJumpButtonSound()
+    {
+            // Play jump sound when the charge key is released
+           PlaySound(jump, audioSourceEffects);
+    }
+    public void slideSOund()
+    {
+        audioSourceMovement.loop = true;
+        PlaySound(slide, audioSourceMovement);
+    }
+    public void stopSlideSound()
+    {
+        StopSound(audioSourceMovement);
+    }
+
 }

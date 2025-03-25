@@ -38,13 +38,14 @@ public class Bulle : MonoBehaviour
     Animator myAnimator;
     Animator barreChargementAnimator;
     SpriteRenderer mySpriteRenderer;
-
+    PlayerSoundManager mySoundManager;
     Soap blocSavonSurLequelOnEstAttache;
 
     Vector2 directionSaut;
 
     bool inputAccepted = true;
     bool isDead = false;
+    bool isLeavingLevelAfterWin = false;
 
     float _timeChargingJump = 0;
 
@@ -55,8 +56,10 @@ public class Bulle : MonoBehaviour
         myAnimator = this.GetComponent<Animator>();
         barreChargementAnimator = transform.Find("BarreChargement").GetComponent<Animator>();
         mySpriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        mySoundManager = this.gameObject.GetComponent<PlayerSoundManager>();
 
-
+        if(mySoundManager == null)
+            throw new System.Exception("Pas de sound manager ?");
         if (zoneBarriere == null)
             throw new System.Exception("Faut mettre la barriere");
 
@@ -65,6 +68,9 @@ public class Bulle : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+       
+
         if (isDead)
             return;
         float moveInputHorizontal = 0;
@@ -102,9 +108,14 @@ public class Bulle : MonoBehaviour
         /*************SUR LE SOL*******************************/
         else
         {
+
             /*Si on en train de charger un saut */
             if (Input.GetKey(KeyCode.Space))
+            {
+                this.mySoundManager.stopSlideSound(); /*TEST*/
                 chargerSaut();
+            }
+
             else
             {
                 /*On saute si un saut a été chargé*/
@@ -113,6 +124,7 @@ public class Bulle : MonoBehaviour
                 else
                 {
                     /*Sinon on gère le déplacement*/
+                    
                     /*Sur un mur horizontal*/
                     if (this.directionSaut.x == 0)
                         rb.linearVelocityX = moveInputHorizontal * moveSpeedOnTheGRound; // Déplacement horizontal, conserve la vitesse verticale
@@ -121,8 +133,14 @@ public class Bulle : MonoBehaviour
                     if (this.directionSaut.y == 0)
                         rb.linearVelocityY = moveInputVerical * moveSpeedOnTheGRound; // Déplacement horizontal, conserve la vitesse verticale
 
+                    if (rb.linearVelocity != Vector2.zero)
+                        this.mySoundManager.slideSOund();
+                    else 
+                        this.mySoundManager.stopSlideSound(); /*TEST*/
+
                     /*On se colle contre le bord de savon*/
                     rb.linearVelocity += -this.directionSaut *1;
+
                 }
 
                 _timeChargingJump = 0;
@@ -144,6 +162,8 @@ public class Bulle : MonoBehaviour
         {
            
             myAnimator.SetTrigger("ChargeJump");
+            mySoundManager.chargeJumpSound();
+
             rb.linearVelocity = Vector2.zero;
         }
 
@@ -155,6 +175,8 @@ public class Bulle : MonoBehaviour
     {
         barreChargementAnimator.SetTrigger("releaseButton");
         barreChargementAnimator.SetFloat("chargement", 0);
+        mySoundManager.releaseJumpButtonSound();
+
         _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
 
         particleOnJump.Play();
@@ -204,6 +226,7 @@ public class Bulle : MonoBehaviour
         isDead = true;
         rb.linearVelocity = Vector2.zero;
         myAnimator.SetTrigger("Explosion");
+        mySoundManager.deathSound();
         StartCoroutine(waittheGameOver());
         return;
     }
@@ -244,8 +267,9 @@ public class Bulle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("fin"))
+        if (collision.gameObject.CompareTag("fin") )
         {
+            isLeavingLevelAfterWin = true;
             GameManager.Instance.WinRoom();
         }
     }
@@ -267,7 +291,7 @@ public class Bulle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("wall") && !isAccrocheAuSavon())
+        if (collision.gameObject.CompareTag("wall") && !isAccrocheAuSavon() && !isLeavingLevelAfterWin)
         {
             pop();
             return;
