@@ -1,52 +1,52 @@
-using UnityEngine;
 using System.Collections;
-using static UnityEngine.LightAnchor;
+using UnityEngine;
+using GameUtils;
+
 
 public class Bulle : MonoBehaviour
 {
-    [SerializeField] float customGravity = 2; // Accélération gravité personnalisée
-    [SerializeField] float horizontalMovementSpeed = 8f;
+
+
+
+
+    /*Variable à ajuster*/
+    [SerializeField] float flottementVersLeHaut = 2; // Accélération gravité Vers le haut
+
+
+    [SerializeField] float moveSpeedOnTheGRound = 8f;
+
+    [SerializeField] float moveSpeedOnTheAir;
+    [SerializeField] float decelarationInTheAir;
+
+    [SerializeField] float maxMooveSpeed = 6f;
+
 
     [SerializeField] float maxJumpForce = 30;
-
     [SerializeField] float maxChargeTimeJump;
-    [SerializeField] float maxSpeedInTheAir;
-    [SerializeField] float decelaration;
-
-    [SerializeField] float maxSpeedXInTheAir; 
 
 
-    Vector2 jumpDirection;
+    [SerializeField] Collider2D zoneBarriere;
+    [SerializeField] ParticleSystem particleOnJump;
+    [SerializeField] ParticleSystem particleOnJump2;
+
+    [SerializeField] ParticleSystem particleOnSlide;
+    /*[SerializeField] float maxSpeedInTheAir;*/
 
 
-
+    /*Affecté dans le start*/
     Rigidbody2D rb;
-
-
-    /*Infos sur le savon*/
-    GameObject blocSavonSurLequelOnEstAttache;
-    bool accrochedAuSavon;
-
-
-        /*Pour éviter de sortir du bloc de savon*/
-        float minDistSavon ;
-        float maxDistSavon ;
-
-
-    float _timeChargingJump = 0f;
-
-    Vector2 movementDirectionOnGround;
-
-    float inputVerticalDirection;  
-    float inputHorizontalDirection;
-
-    AngleSavon currentZoneAngle;
     Animator myAnimator;
     Animator barreChargementAnimator;
+    SpriteRenderer mySpriteRenderer;
 
+    Soap blocSavonSurLequelOnEstAttache;
 
-    bool isDead =false;
+    Vector2 directionSaut;
 
+    bool inputAccepted = true;
+    bool isDead = false;
+
+    float _timeChargingJump = 0;
 
     void Start()
     {
@@ -54,175 +54,151 @@ public class Bulle : MonoBehaviour
 
         myAnimator = this.GetComponent<Animator>();
         barreChargementAnimator = transform.Find("BarreChargement").GetComponent<Animator>();
+        mySpriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+
+
+        if (zoneBarriere == null)
+            throw new System.Exception("Faut mettre la barriere");
+
+        zoneBarriere.enabled = false;
     }
-   
-    // Update is called once per frame
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
         if (isDead)
             return;
-     
-        /*On lit l'input*/
-        inputHorizontalDirection = Input.GetAxis("Horizontal");
-        inputVerticalDirection = Input.GetAxis("Vertical");
+        float moveInputHorizontal = 0;
+        float moveInputVerical = 0;
 
-
-        /*************** SUR LE SOL************/
-        if (accrochedAuSavon)
+        if (inputAccepted)
         {
-            if( _timeChargingJump == 0)
-            {
-                if (currentZoneAngle != null && this.oppositeDirectionPressed())
-                {
-                    currentZoneAngle.changerDeBord(this, blocSavonSurLequelOnEstAttache);
-                }
-                /*Sur un mur vertical*/
-                if (movementDirectionOnGround == new Vector2(0, 1))
-                {
-                    rb.AddForceY(inputVerticalDirection * horizontalMovementSpeed );
+            moveInputHorizontal = Input.GetAxisRaw("Horizontal");  // "Horizontal" : touches directionnelles (A, D ou flèches)
+            moveInputVerical = Input.GetAxisRaw("Vertical");  // "Horizontal" : touches directionnelles (A, D ou flèches)
+        }
+
+        /*************DANS LES AIRS************************/
+        if (!isAccrocheAuSavon())
+        {
+
+            /*A voir pour enlever*/
+            myAnimator.SetBool("Soap", false);
 
 
-                    /*On bloque si on est au bord*/
-                    if (transform.position.y > maxDistSavon - 0.001)
-                        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Min(rb.linearVelocity.y, 0));
-                    if (transform.position.y < minDistSavon + 0.001)
-                        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, 0));
-                }
+            /* On pousse vers le haut*/
+            float newVelocityY = rb.linearVelocityY + (flottementVersLeHaut * Time.fixedDeltaTime);
+            rb.linearVelocityY = Mathf.Min(maxMooveSpeed, newVelocityY);
 
-                /*Sur un mur horizontal*/
-                else if (movementDirectionOnGround == new Vector2(1, 0))
-                {
 
-                    rb.AddForceX(inputHorizontalDirection * horizontalMovementSpeed);
+            // Déplacement horizontal, conserve la vitesse verticale
+            rb.linearVelocityX += moveInputHorizontal * moveSpeedOnTheAir *Time.fixedDeltaTime; 
 
-                    /*On bloque si on est au bord*/
-                    if (transform.position.x > maxDistSavon - 0.001)
-                        rb.linearVelocity = new Vector2(Mathf.Min(rb.linearVelocity.x, 0), rb.linearVelocity.y);
 
-                    if (transform.position.x < minDistSavon + 0.001)
-                        rb.linearVelocity = new Vector2(Mathf.Max(rb.linearVelocity.x, 0), rb.linearVelocity.y);
-                
-                }
-                else
-                {
-                    throw new System.Exception("Pas de sens de déplacement");
-                }
-            }
+            /*ON ralentit la vitesse*/
+            rb.linearVelocityX = Mathf.MoveTowards(rb.linearVelocityX, 0, decelarationInTheAir * Time.fixedDeltaTime);
             
 
-            if (Input.GetKey(KeyCode.Space) && accrochedAuSavon)
-            {
-                if (_timeChargingJump == 0)
-                {
-                    barreChargementAnimator.SetTrigger("startChargement");
-                    myAnimator.SetTrigger("ChargeJump");
-                    rb.linearVelocity = Vector2.zero;
-                }
-                    
-                _timeChargingJump += Time.deltaTime;
+        }
 
-                Debug.Log("On charge le saut charge Time : " + (_timeChargingJump / maxChargeTimeJump) * 100 + " % ");
-            }
-
+        /*************SUR LE SOL*******************************/
+        else
+        {
+            /*Si on en train de charger un saut */
+            if (Input.GetKey(KeyCode.Space))
+                chargerSaut();
             else
             {
-                if (_timeChargingJump > 0 && accrochedAuSavon)
+                /*On saute si un saut a été chargé*/
+                if (_timeChargingJump > 0)
+                    sauter();
+                else
                 {
-                    barreChargementAnimator.SetTrigger("releaseButton");
+                    /*Sinon on gère le déplacement*/
+                    /*Sur un mur horizontal*/
+                    if (this.directionSaut.x == 0)
+                        rb.linearVelocityX = moveInputHorizontal * moveSpeedOnTheGRound; // Déplacement horizontal, conserve la vitesse verticale
 
-                    _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
+                    /*Sur un mur vertical*/
+                    if (this.directionSaut.y == 0)
+                        rb.linearVelocityY = moveInputVerical * moveSpeedOnTheGRound; // Déplacement horizontal, conserve la vitesse verticale
 
-
-
-                    /*On récup le pourcentage de temps appuyé*/
-                    float timePressedPercent = _timeChargingJump / maxChargeTimeJump;
-                    doAJump(this.jumpDirection, Mathf.Lerp(0, maxJumpForce, timePressedPercent));
+                    /*On se colle contre le bord de savon*/
+                    rb.linearVelocity += -this.directionSaut *1;
                 }
+
                 _timeChargingJump = 0;
             }
 
-            /* On freine sur le sol*/
-            rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelaration * Time.fixedDeltaTime);
-
         }
-        /***************DANS LES AIRS************/
-        else
-        {
-            
-            rb.AddForceX(inputHorizontalDirection * horizontalMovementSpeed);
+    }
 
-
-
-            rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocityX, -maxSpeedXInTheAir, maxSpeedXInTheAir), Mathf.Clamp(rb.linearVelocityY, -maxSpeedInTheAir, maxSpeedInTheAir));
-
-
-            /* Custom Gravity*/
-            rb.linearVelocityY += customGravity * Time.fixedDeltaTime;
-
-        }
-        rb.linearVelocity = Vector2.MoveTowards(rb.linearVelocity, Vector2.zero, decelaration * Time.fixedDeltaTime);
+    bool isAccrocheAuSavon()
+    {
+        return blocSavonSurLequelOnEstAttache != null;
     }
 
 
-    void doAJump(Vector2 jumpDirection, float jumpForce)
+
+    void chargerSaut()
     {
-        if (jumpDirection == Vector2.zero)
-            throw new System.Exception("Ah ben non on peut pas sauter à 0 "); 
+        if (_timeChargingJump == 0)
+        {
+           
+            myAnimator.SetTrigger("ChargeJump");
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        _timeChargingJump += Time.deltaTime;
+        barreChargementAnimator.SetFloat("chargement", _timeChargingJump / maxChargeTimeJump);
+    }
+
+    void sauter()
+    {
+        barreChargementAnimator.SetTrigger("releaseButton");
+        barreChargementAnimator.SetFloat("chargement", 0);
+        _timeChargingJump = Mathf.Min(_timeChargingJump, maxChargeTimeJump);
+
+        particleOnJump.Play();
+        particleOnJump2.Play();
+
+        /*On récup le pourcentage de temps appuyé*/
+        float pourcentagePuissanceSaut = _timeChargingJump / maxChargeTimeJump;
+
+        if (directionSaut == Vector2.zero)
+            throw new System.Exception("Ah ben non on peut pas sauter à 0 ");
 
         myAnimator.SetTrigger("Jump");
         myAnimator.SetBool("Soap", false);
-        rb.AddForce(jumpDirection * jumpForce, ForceMode2D.Impulse);
-        Debug.Log("On saute avec une force de " + jumpForce);
+        rb.AddForce(directionSaut * (pourcentagePuissanceSaut * maxJumpForce), ForceMode2D.Impulse);
+        StartCoroutine(blocInput());
+        Debug.Log("On saute avec une force de " + (pourcentagePuissanceSaut * maxJumpForce));
     }
 
 
-    public void stickTo(Soap blocSavon)
+    IEnumerator blocInput()
     {
-        
-        Debug.Log("On s'accroche au bloc : " + blocSavon.gameObject+ "\n \tJump direction : " + blocSavon.getJumpDirection() + "\n\t Horizontal ? " + blocSavon.isWallHorizontal());
+        inputAccepted = false;
+        yield return new WaitForSeconds(0.15f);
+        inputAccepted = true;
 
-        blocSavonSurLequelOnEstAttache = blocSavon.gameObject;
-        accrochedAuSavon = true;
-        this.jumpDirection = blocSavon.getJumpDirection();
-        this.rotate(this.jumpDirection);
-        myAnimator.SetBool("Soap", true);
-            
-
-
-        /*On récupère la taille max*/
-        
-        if (blocSavon.isWallHorizontal())
-        {
-            this.movementDirectionOnGround = new Vector2(1, 0);
-            minDistSavon = blocSavon.getCoin(Utils.CoinRectangle.BAS_GAUCHE).x;
-            maxDistSavon = blocSavon.getCoin(Utils.CoinRectangle.BAS_DROITE).x;
-        }
-        else
-        {
-            this.movementDirectionOnGround = new Vector2(0, 1);
-            minDistSavon = blocSavon.getCoin(Utils.CoinRectangle.BAS_GAUCHE).y;
-            maxDistSavon = blocSavon.getCoin(Utils.CoinRectangle.HAUT_GAUCHE).y;
-        }
-        
-
-        
-        /*On s'arrête d'un coup A retirer ? */
-        rb.linearVelocity = Vector2.zero;
-        rb.AddForce(-this.jumpDirection);
     }
 
-
-
-    void unstick()
+    private void stickTo(Soap blocSavon)
     {
-        Debug.Log("On se détache du bloc " + blocSavonSurLequelOnEstAttache.name);
-        
-        myAnimator.SetBool("Soap", false);
-        accrochedAuSavon = false;
+        Debug.Log("On s'accroche au bloc " + blocSavon);
+        this.directionSaut =blocSavon.getJumpDirection();
+        blocSavonSurLequelOnEstAttache = blocSavon;
+
+    }
+    private void unStick()
+    {
+        Debug.Log("On se détache du bloc " + blocSavonSurLequelOnEstAttache);
+        this.directionSaut = Vector2.zero;
         blocSavonSurLequelOnEstAttache = null;
+        myAnimator.SetBool("Soap", false);
+        zoneBarriere.enabled = false;
+        particleOnSlide.Stop();
+
     }
-
-
     void pop()
     {
         isDead = true;
@@ -240,80 +216,73 @@ public class Bulle : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-
-
-
-    /*Retourne vrai si on est sur un mur et qu'on appuie sur une autre*/
-    bool oppositeDirectionPressed()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (movementDirectionOnGround == Vector2.up)
+        if (collision.gameObject.tag == "bordCollant")
         {
-            return Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow);
-        }
+            Debug.Log("On est tjrs sur un bloc");
 
-        if (movementDirectionOnGround == Vector2.right)
-        {
-            return Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow);
-        }
-        return false;
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        if (collision.gameObject.CompareTag("wall") && !accrochedAuSavon)
-        {
-            pop();
-            return;
-        }
-        else if (collision.gameObject.CompareTag("soap"))
-        {   
-            if (!accrochedAuSavon)
-                stickTo(collision.gameObject.GetComponent<Soap>());
+            Soap hehe = collision.gameObject.GetComponent<Soap>();
+            blocSavonSurLequelOnEstAttache = hehe;
+            this.directionSaut = hehe.getJumpDirection();
+            this.rotate(this.directionSaut);
+            myAnimator.SetBool("Soap", true);
+            zoneBarriere.enabled = true;
+            if (!particleOnSlide.isPlaying)
+                particleOnSlide.Play();
         }
     }
 
-
-    private void OnCollisionExit2D(UnityEngine.Collision2D collision)
+    void rotate(Vector2 normalVector)
     {
-        if (collision.gameObject.CompareTag("soap") && collision.gameObject == blocSavonSurLequelOnEstAttache)
-        {
-            unstick();
-        }
+
+        float newAngle = Utils.calculateRealAngle(Vector2.up, normalVector);
+        transform.rotation = Quaternion.Euler(0, 0, newAngle);
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.gameObject.CompareTag("angle"))
-        {
-            Debug.Log("On rentre dans un angle");
-            currentZoneAngle = collision.gameObject.GetComponent<AngleSavon>();
-
-        }
         if (collision.gameObject.CompareTag("fin"))
         {
             GameManager.Instance.WinRoom();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("angle"))
+
+
+        /*Vérif si il n'y a pas d'autres collisions*/
+        private void OnTriggerExit2D(Collider2D collision)
+       {
+        if (collision.gameObject.tag == "bordCollant")
         {
-            Debug.Log("On sort d'un angle");
-            currentZoneAngle = null;
+            if (collision.gameObject.GetComponent<Soap>() == blocSavonSurLequelOnEstAttache)
+            {
+                unStick();
+            }
+        }
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("wall") && !isAccrocheAuSavon())
+        {
+            pop();
+            return;
         }
     }
 
-
-    void rotate(Vector2 normalVector)
-    {
-
-        float newAngle =  Utils.calculateRealAngle(Vector2.up, normalVector);
-        transform.rotation = Quaternion.Euler(0, 0, newAngle);
-
+    public MovementDirection GetDirection(){
+        if(rb.linearVelocityY > 1){
+            return MovementDirection.MOVING_UP;
+        }
+        if(rb.linearVelocityY < -1){
+            return MovementDirection.MOVING_DOWN;
+        }
+        return MovementDirection.NEUTRAL;
     }
+
 
 }

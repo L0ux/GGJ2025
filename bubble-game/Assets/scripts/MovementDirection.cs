@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GameUtils
 {
-    public enum Direction
+    public enum MovementDirection
     {
         MOVING_UP,
         MOVING_DOWN,

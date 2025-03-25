@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
     
     private float limitPos;
 
-    private Bulle2 playerController;
+    private Bulle playerController;
     public float fixedX; // Position X fixe
     public float fixedZ; // Position Z fixe (classique pour une caméra 2D)
 
@@ -23,27 +23,27 @@ public class CameraFollow : MonoBehaviour
     public float lerpDuration = 1f; // Durée de la transition fluide en secondes
     private float lerpTime = 0f; // Compteur pour le temps de transition
 
-    private Direction oldDirection = Direction.NEUTRAL; // Ancienne direction du joueur
+    private MovementDirection oldDirection = MovementDirection.NEUTRAL; // Ancienne direction du joueur
 
     void Start()
     {
         limitPos = INIT_POS_Y - getDeltaHeightForMiddle();
-        playerController = player.GetComponent<Bulle2>();
+        playerController = player.GetComponent<Bulle>();
         smoothSpeed = INIT_SMOOTH_SPEED;
         Vector3 targetPosition = new Vector3(fixedX, INIT_POS_Y, fixedZ);
         transform.position = targetPosition;
     }
 
-    void UpdateLimitPos(Direction direction)
+    void UpdateLimitPos(MovementDirection direction)
     {
         switch(direction){
-            case Direction.MOVING_UP:
+            case MovementDirection.MOVING_UP:
                 limitPos = Camera.main.transform.position.y - getDeltaHeightForMiddle();
                 break;
-            case Direction.MOVING_DOWN:
+            case MovementDirection.MOVING_DOWN:
                 limitPos = Camera.main.transform.position.y + getDeltaHeightForMiddle();
                 break;
-            case Direction.NEUTRAL:
+            case MovementDirection.NEUTRAL:
                 limitPos = player.position.y;
                 break;
             default:
@@ -56,25 +56,25 @@ public class CameraFollow : MonoBehaviour
         return (Camera.main.orthographicSize / 6);
     }
 
-    float getNewYPosCamera(Direction direction){
+    float getNewYPosCamera(MovementDirection direction){
         if(player.position.y < (INIT_POS_Y + MAX_POS_Y)/2){
             switch(direction){
-                case Direction.MOVING_UP:
+                case MovementDirection.MOVING_UP:
                     return Mathf.Max(player.position.y + getDeltaHeightForMiddle(), INIT_POS_Y);
-                case Direction.MOVING_DOWN:
+                case MovementDirection.MOVING_DOWN:
                     return Mathf.Max(player.position.y - getDeltaHeightForMiddle(), INIT_POS_Y);
-                case Direction.NEUTRAL:
+                case MovementDirection.NEUTRAL:
                     return Mathf.Max(player.position.y, INIT_POS_Y);
                 default:
                     return Mathf.Max(player.position.y, INIT_POS_Y);
             }
         } else {
             switch(direction){
-                case Direction.MOVING_UP:
+                case MovementDirection.MOVING_UP:
                     return player.position.y + getDeltaHeightForMiddle();
-                case Direction.MOVING_DOWN:
+                case MovementDirection.MOVING_DOWN:
                     return player.position.y - getDeltaHeightForMiddle();
-                case Direction.NEUTRAL:
+                case MovementDirection.NEUTRAL:
                     return player.position.y;
                 default:
                     return player.position.y;
@@ -82,26 +82,26 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    bool isCameraLockedBot(Direction direction){
+    bool isCameraLockedBot(MovementDirection direction){
         switch(direction){
-            case Direction.MOVING_UP:
+            case MovementDirection.MOVING_UP:
                 return player.position.y < INIT_POS_Y - getDeltaHeightForMiddle();
-            case Direction.MOVING_DOWN:
+            case MovementDirection.MOVING_DOWN:
                 return player.position.y > INIT_POS_Y + getDeltaHeightForMiddle();
-            case Direction.NEUTRAL:
+            case MovementDirection.NEUTRAL:
                 return player.position.y < INIT_POS_Y;
             default:
                 return player.position.y < INIT_POS_Y;
         }
     }
 
-    bool isCameraLockedTop(Direction direction){
+    bool isCameraLockedTop(MovementDirection direction){
         switch(direction){
-            case Direction.MOVING_UP:
+            case MovementDirection.MOVING_UP:
                 return player.position.y > Camera.main.transform.position.y + getDeltaHeightForMiddle();
-            case Direction.MOVING_DOWN:
+            case MovementDirection.MOVING_DOWN:
                 return player.position.y < Camera.main.transform.position.y - getDeltaHeightForMiddle();
-            case Direction.NEUTRAL:
+            case MovementDirection.NEUTRAL:
                 return player.position.y > Camera.main.transform.position.y;
             default:
                 return player.position.y > Camera.main.transform.position.y;
